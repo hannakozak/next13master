@@ -1,14 +1,27 @@
-import Link from "next/link";
+import { ActiveLink } from "../atoms/ActiveLink";
 
 export const Navigation = () => {
 	return (
 		<nav className="border-b-2 p-3">
 			<ul className="flex justify-center">
 				<li className="px-2">
-					<Link href="/">Home</Link>
+					<ActiveLink
+						href="/"
+						exact
+						className="text-blue-600 hover:text-blue-800"
+						activeClassName="text-blue-800 border border-2 border-b-blue-800"
+					>
+						Home
+					</ActiveLink>
 				</li>
 				<li>
-					<Link href="/products">Products</Link>
+					<ActiveLink
+						href="/products"
+						className="text-blue-600 hover:text-blue-800"
+						activeClassName="text-blue-800 border border-2 border-b-blue-800"
+					>
+						All
+					</ActiveLink>
 				</li>
 			</ul>
 		</nav>
