@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Header } from "@/ui/organisms/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,13 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>{children}</body>
+			<body className={inter.className}>
+				<Header />
+				<main className="mx-auto">{children}</main>
+				<footer className="fixed bottom-0 m-3 w-screen text-center">
+					&copy; 2023 Next13Masters
+				</footer>
+			</body>
 		</html>
 	);
 }
