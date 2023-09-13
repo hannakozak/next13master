@@ -1,5 +1,6 @@
 "use client";
 
+import { type UrlObject } from "url";
 import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
@@ -7,7 +8,7 @@ import { type ReactNode } from "react";
 import { type Route } from "next";
 
 type ActiveLinkProps<T extends string> = {
-	href: Route<T> | URL;
+	href: Route<T> | UrlObject;
 	children: ReactNode;
 	exact?: boolean;
 	className?: string;
@@ -32,7 +33,7 @@ export const ActiveLink = <T extends string>({
 	if (typeof href === "object") {
 		isActive = exact
 			? pathname === href.pathname
-			: pathname.startsWith(href.pathname);
+			: pathname.startsWith(href.pathname || "");
 	}
 
 	return (
