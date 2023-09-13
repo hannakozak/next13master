@@ -20,7 +20,7 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<Header />
 				<main className="mx-auto">{children}</main>
-				<footer className="fixed bottom-0 m-3 w-screen text-center">
+				<footer className="fixed bottom-0 w-screen bg-white p-3 text-center">
 					&copy; 2023 Next13Masters
 				</footer>
 			</body>
