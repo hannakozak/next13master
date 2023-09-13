@@ -8,7 +8,7 @@ export const Navigation = () => {
 					<ActiveLink
 						href="/"
 						exact
-						className="text-blue-600 hover:text-blue-800"
+						className="font-semibold text-blue-600 hover:text-blue-800"
 						activeClassName="text-blue-800 border border-2 border-b-blue-800"
 					>
 						Home
@@ -17,7 +17,7 @@ export const Navigation = () => {
 				<li>
 					<ActiveLink
 						href="/products"
-						className="text-blue-600 hover:text-blue-800"
+						className=" font-semibold text-blue-600 hover:text-blue-800"
 						activeClassName="text-blue-800 border border-2 border-b-blue-800"
 					>
 						All
