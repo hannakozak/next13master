@@ -17,6 +17,7 @@ export const Navigation = () => {
 				<li>
 					<ActiveLink
 						href="/products"
+						exact={false}
 						className=" font-semibold text-blue-600 hover:text-blue-800"
 						activeClassName="text-blue-800 border border-2 border-b-blue-800"
 					>
