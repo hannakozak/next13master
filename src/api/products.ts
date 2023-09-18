@@ -14,7 +14,7 @@ type ProductResponseItem = {
 };
 
 export const getProductsList = async () => {
-	const take = 4;
+	const take = 40;
 	const res = await fetch(
 		`https://naszsklep-api.vercel.app/api/products?take=${take}`,
 	);

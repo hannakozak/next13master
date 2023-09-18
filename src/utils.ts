@@ -8,7 +8,7 @@ export const formatMoney = (amount: number) => {
 export const getPaginationRange = ({
 	currentPage,
 	min = 1,
-	total = 20,
+	total = 10,
 	length = 5,
 }: {
 	currentPage: number;

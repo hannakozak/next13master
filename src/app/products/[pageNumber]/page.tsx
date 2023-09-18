@@ -1,6 +1,18 @@
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductListByPage } from "@/api/products";
+import {
+	getProductListByPage,
+	getProductsList,
+} from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
+
+export const generateStaticParams = async () => {
+	await getProductsList();
+	const numberGeneretedPages = 5;
+
+	return Array.from({ length: numberGeneretedPages }, (_, index) => ({
+		pageNumber: (index + 1).toString(),
+	}));
+};
 
 export default async function Products({
 	params,
@@ -8,9 +20,6 @@ export default async function Products({
 	params: { pageNumber: number };
 }) {
 	const products = await getProductListByPage(params.pageNumber);
-	if (!products) {
-		return <div>404</div>;
-	}
 
 	return (
 		<>
