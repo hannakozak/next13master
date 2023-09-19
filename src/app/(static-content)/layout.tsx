@@ -3,5 +3,5 @@ export default function StaticLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return <div className=" prose mx-auto p-6">{children}</div>;
+	return <div className="mx-auto">{children}</div>;
 }
