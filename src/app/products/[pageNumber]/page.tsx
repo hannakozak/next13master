@@ -10,7 +10,18 @@ export const generateStaticParams = async ({
 	params: { pageNumber: number };
 }) => {
 	await getProductsList(params.pageNumber);
-	const numberGeneretedPages = 5;
+	const graphqlResponse = await executeGraphql(
+		GetProductsCountDocument,
+		{},
+	);
+	const productsCount =
+		graphqlResponse.productsConnection.aggregate.count;
+
+	const productsPerPage = 4;
+
+	const numberGeneretedPages = Math.ceil(
+		productsCount / productsPerPage,
+	);
 
 	return Array.from({ length: numberGeneretedPages }, (_, index) => ({
 		pageNumber: (index + 1).toString(),
@@ -23,19 +34,19 @@ export default async function Products({
 	params: { pageNumber: number };
 }) {
 	const products = await getProductsList(params.pageNumber);
-	const productsCount = await executeGraphql(
+	const graphqlResponse = await executeGraphql(
 		GetProductsCountDocument,
 		{},
 	);
+	const productsCount =
+		graphqlResponse.productsConnection.aggregate.count;
 
 	return (
 		<>
 			<ProductList products={products} />
 			<Pagination
 				currentPage={params.pageNumber}
-				productsCount={
-					productsCount.productsConnection.aggregate.count
-				}
+				productsCount={productsCount}
 			/>
 		</>
 	);

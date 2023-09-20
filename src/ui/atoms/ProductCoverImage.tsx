@@ -2,8 +2,8 @@ export const ProductCoverImage = ({
 	src,
 	alt,
 }: {
-	src: string;
-	alt: string;
+	src?: string;
+	alt?: string;
 }) => {
 	return (
 		<div className="rounded-md border bg-slate-50 ">
