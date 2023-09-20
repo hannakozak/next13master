@@ -8,19 +8,22 @@ export const formatMoney = (amount: number) => {
 export const getPaginationRange = ({
 	currentPage,
 	min = 1,
-	total = 10,
-	length = 5,
+	productsCount,
+	productsPerPage = 4,
 }: {
 	currentPage: number;
 	min?: number;
 	total?: number;
-	length?: number;
+	productsCount: number;
+	productsPerPage?: number;
 }) => {
-	if (length > total) length = total;
+	const numberOfPages = Math.ceil(productsCount / productsPerPage);
+	if (productsPerPage > numberOfPages)
+		productsPerPage = numberOfPages;
 
-	let start = currentPage - Math.floor(length / 2);
+	let start = currentPage - Math.floor(numberOfPages / 2);
 	start = Math.max(start, min);
-	start = Math.min(start, min + total - length);
+	start = Math.min(start, min + productsCount - numberOfPages);
 
-	return Array.from({ length: length }, (_, i) => start + i);
+	return Array.from({ length: numberOfPages }, (_, i) => start + i);
 };

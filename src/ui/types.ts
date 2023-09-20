@@ -4,7 +4,7 @@ export type ProductItemType = {
 	name: string;
 	price: number;
 	description: string;
-	coverImage: {
+	coverImage?: {
 		src: string;
 		alt: string;
 	};

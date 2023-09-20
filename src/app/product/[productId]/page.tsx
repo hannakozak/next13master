@@ -8,13 +8,14 @@ export const generateMetadata = async ({
 	params: { productId: string };
 }): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
+	const images = product.coverImage ? [product.coverImage.src] : [];
 	return {
 		title: `${product.name} - Next.js Shop`,
 		description: product.description,
 		openGraph: {
 			title: `${product.name} - Next.js Shop`,
 			description: product.description,
-			images: [product.coverImage.src],
+			images: images,
 		},
 	};
 };

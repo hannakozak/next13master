@@ -1,0 +1,7 @@
+query GetProductsCount {
+	productsConnection {
+		aggregate {
+			count
+		}
+	}
+}

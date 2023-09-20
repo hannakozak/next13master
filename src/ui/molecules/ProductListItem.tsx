@@ -14,7 +14,9 @@ export const ProductListItem = ({
 		<li>
 			<Link href={`/product/${product.id}`}>
 				<article>
-					<ProductCoverImage {...product.coverImage} />
+					{product.coverImage && (
+						<ProductCoverImage {...product.coverImage} />
+					)}
 					<ProductListItemDescription product={product} />
 				</article>
 			</Link>

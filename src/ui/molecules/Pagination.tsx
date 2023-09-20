@@ -3,10 +3,17 @@ import { getPaginationRange } from "@/utils";
 
 type PaginationProps = {
 	currentPage: number;
+	productsCount: number;
 };
 
-export const Pagination = ({ currentPage }: PaginationProps) => {
-	const pageNumbers = getPaginationRange({ currentPage });
+export const Pagination = ({
+	currentPage,
+	productsCount,
+}: PaginationProps) => {
+	const pageNumbers = getPaginationRange({
+		currentPage,
+		productsCount,
+	});
 
 	return (
 		<nav aria-label="pagination" className="text-center">

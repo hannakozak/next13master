@@ -1,3 +1,7 @@
-export default function Home() {
-	return <h1>Next13Masters</h1>;
+export default async function Home() {
+	return (
+		<>
+			<h1>Next13Masters</h1>
+		</>
+	);
 }
