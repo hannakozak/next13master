@@ -21,9 +21,9 @@ export const getPaginationRange = ({
 	if (productsPerPage > numberOfPages)
 		productsPerPage = numberOfPages;
 
-	let start = currentPage - Math.floor(numberOfPages / 2);
+	let start = currentPage - Math.floor(productsPerPage / 2);
 	start = Math.max(start, min);
-	start = Math.min(start, min + productsCount - numberOfPages);
+	start = Math.min(start, min + numberOfPages - productsPerPage);
 
 	return Array.from({ length: numberOfPages }, (_, i) => start + i);
 };

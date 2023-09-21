@@ -24,6 +24,26 @@ export const Navigation = () => {
 						All
 					</ActiveLink>
 				</li>
+				<li>
+					<ActiveLink
+						href="/products/t-shirts"
+						exact={false}
+						className=" font-semibold text-blue-600 hover:text-blue-800"
+						activeClassName="text-blue-800 border border-2 border-b-blue-800"
+					>
+						T-Shirts
+					</ActiveLink>
+				</li>
+				<li>
+					<ActiveLink
+						href="/products/hoodies"
+						exact={false}
+						className=" font-semibold text-blue-600 hover:text-blue-800"
+						activeClassName="text-blue-800 border border-2 border-b-blue-800"
+					>
+						Hoodies
+					</ActiveLink>
+				</li>
 			</ul>
 		</nav>
 	);
