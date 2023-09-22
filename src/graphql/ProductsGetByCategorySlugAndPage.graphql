@@ -1,6 +1,10 @@
-query ProductsGetByCategorySlug($slug: String!) {
+query ProductsGetByCategorySlugAndPage(
+	$slug: String!
+	$productsPerPage: Int!
+	$offset: Int!
+) {
 	categories(where: { slug: $slug }) {
-		products {
+		products(first: $productsPerPage, skip: $offset) {
 			id
 			name
 			price

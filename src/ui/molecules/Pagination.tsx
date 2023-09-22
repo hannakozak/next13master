@@ -4,11 +4,13 @@ import { getPaginationRange } from "@/utils";
 type PaginationProps = {
 	currentPage: number;
 	productsCount: number;
+	path: "products" | `categories/${string}`;
 };
 
 export const Pagination = ({
 	currentPage,
 	productsCount,
+	path,
 }: PaginationProps) => {
 	const pageNumbers = getPaginationRange({
 		currentPage,
@@ -21,7 +23,7 @@ export const Pagination = ({
 				{pageNumbers.map((pageNumber) => (
 					<li key={pageNumber}>
 						<ActiveLink
-							href={`/products/${pageNumber}`}
+							href={`/${path}/${pageNumber}`}
 							exact={false}
 							className="m-1 rounded-md border-2 px-3 py-2 font-semibold text-blue-600 hover:text-blue-800"
 							activeClassName="text-blue-800 border border-2 border-blue-800"

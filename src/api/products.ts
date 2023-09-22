@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
+	ProductsGetByCategorySlugAndPageDocument,
+	ProductsGetByCategorySlugDocument,
 	ProductsGetListDocument,
 } from "@/gql/graphql";
 import { type ProductItemType } from "@/ui/types";
@@ -53,4 +55,49 @@ export const getProductById = async (id: string) => {
 			alt: product.name,
 		},
 	};
+};
+
+export const getProductsByCategorySlugAndPage = async (
+	pageNumber: number,
+	categorySlug: string,
+) => {
+	const productsPerPage = 4;
+	const offset = (pageNumber - 1) * productsPerPage;
+	const categories = await executeGraphql(
+		ProductsGetByCategorySlugAndPageDocument,
+		{
+			slug: categorySlug,
+			productsPerPage: productsPerPage,
+			offset: offset,
+		},
+	);
+	const products = categories.categories[0]?.products;
+
+	return products?.map((product) => {
+		return {
+			id: product.id,
+			category: product.categories[0]?.name || "",
+			name: product.name,
+			price: product.price,
+			description: product.description,
+			coverImage: product.images[0] && {
+				src: product.images[0].url,
+				alt: product.name,
+			},
+		};
+	});
+};
+
+export const getProductsByCategorySlugCount = async (
+	categorySlug: string,
+) => {
+	const categories = await executeGraphql(
+		ProductsGetByCategorySlugDocument,
+		{
+			slug: categorySlug,
+		},
+	);
+	const products = categories.categories[0]?.products;
+
+	return products?.length;
 };

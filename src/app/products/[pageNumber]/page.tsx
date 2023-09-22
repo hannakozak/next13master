@@ -47,6 +47,7 @@ export default async function Products({
 			<Pagination
 				currentPage={params.pageNumber}
 				productsCount={productsCount}
+				path="products"
 			/>
 		</>
 	);
