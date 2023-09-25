@@ -1,0 +1,7 @@
+query CollectionsGetBySlug($slug: String!) {
+	collections(where: { slug: $slug }) {
+		id
+		name
+		slug
+	}
+}
