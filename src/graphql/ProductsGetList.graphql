@@ -11,4 +11,9 @@ query ProductsGetList($productsPerPage: Int, $offset: Int) {
 			url
 		}
 	}
+	productsConnection {
+		aggregate {
+			count
+		}
+	}
 }

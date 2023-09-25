@@ -13,18 +13,18 @@ const nextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/categories/t-shirts",
-				destination: "/categories/t-shirts/1",
+				source: "/categories/T-Shirts",
+				destination: "/categories/T-Shirts/1",
 				permanent: false,
 			},
 			{
-				source: "/categories/hoodies",
-				destination: "/categories/hoodies/1",
+				source: "/categories/Hoodies",
+				destination: "/categories/Hoodies/1",
 				permanent: false,
 			},
 			{
-				source: "/categories/accessories",
-				destination: "/categories/accessories/1",
+				source: "/categories/Accessories",
+				destination: "/categories/Accessories/1",
 				permanent: false,
 			},
 		];

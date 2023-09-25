@@ -1,4 +1,4 @@
-query GetProductsCount {
+query ProductsGetTotalCount {
 	productsConnection {
 		aggregate {
 			count

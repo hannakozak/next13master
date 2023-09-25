@@ -24,7 +24,7 @@ export const ActiveLink = <T extends string>({
 }: ActiveLinkProps<T>) => {
 	const pathname = usePathname();
 
-	let isActive;
+	let isActive = false;
 
 	if (typeof href === "string") {
 		isActive = exact ? pathname === href : pathname.startsWith(href);
@@ -36,7 +36,15 @@ export const ActiveLink = <T extends string>({
 			: pathname.startsWith(href.pathname || "");
 	}
 
-	return (
+	return isActive ? (
+		<Link
+			href={href}
+			className={clsx(className, isActive && activeClassName)}
+			aria-current
+		>
+			{children}
+		</Link>
+	) : (
 		<Link
 			href={href}
 			className={clsx(className, isActive && activeClassName)}

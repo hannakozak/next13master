@@ -1,9 +1,9 @@
-query ProductsGetByCategorySlugAndPage(
-	$slug: String!
-	$productsPerPage: Int!
-	$offset: Int!
+query ProductsGetByCategoryName(
+	$name: String
+	$productsPerPage: Int
+	$offset: Int
 ) {
-	categories(where: { slug: $slug }) {
+	categories(where: { name: $name }) {
 		products(first: $productsPerPage, skip: $offset) {
 			id
 			name

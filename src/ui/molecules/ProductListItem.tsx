@@ -11,15 +11,13 @@ export const ProductListItem = ({
 	product,
 }: ProductListItemProps) => {
 	return (
-		<li>
-			<Link href={`/product/${product.id}`}>
-				<article>
-					{product.coverImage && (
-						<ProductCoverImage {...product.coverImage} />
-					)}
-					<ProductListItemDescription product={product} />
-				</article>
-			</Link>
-		</li>
+		<Link href={`/product/${product.id}`} aria-busy={false}>
+			<article>
+				{product.coverImage && (
+					<ProductCoverImage {...product.coverImage} />
+				)}
+				<ProductListItemDescription product={product} />
+			</article>
+		</Link>
 	);
 };

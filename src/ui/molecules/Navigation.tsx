@@ -3,7 +3,7 @@ import { type Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
 
 type NavLinksProps = {
-	href: UrlObject | Route<string>;
+	href: Route<string> | UrlObject;
 	label: string;
 	exact: boolean;
 };
@@ -11,10 +11,10 @@ type NavLinksProps = {
 const navLinks: NavLinksProps[] = [
 	{ href: "/", label: "Home", exact: true },
 	{ href: "/products", label: "All", exact: false },
-	{ href: "/categories/t-shirts", label: "T-Shirts", exact: false },
-	{ href: "/categories/hoodies", label: "Hoodies", exact: false },
+	{ href: "/categories/T-Shirts", label: "T-shirts", exact: false },
+	{ href: "/categories/Hoodies", label: "Hoodies", exact: false },
 	{
-		href: "/categories/accessories",
+		href: "/categories/Accessories",
 		label: "Accessories",
 		exact: false,
 	},

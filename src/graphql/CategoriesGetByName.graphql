@@ -1,0 +1,7 @@
+query CategoriesGetByName($name: String!) {
+	categories(where: { name: $name }) {
+		id
+		name
+		slug
+	}
+}

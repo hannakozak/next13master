@@ -2,9 +2,10 @@ import { notFound } from "next/navigation";
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
-	ProductsGetByCategorySlugAndPageDocument,
-	ProductsGetByCategorySlugDocument,
+	ProductsGetByCategoryNameDocument,
 	ProductsGetListDocument,
+	ProductsGetTotalCountByCategoryNameDocument,
+	ProductsGetTotalCountDocument,
 } from "@/gql/graphql";
 import { type ProductItemType } from "@/ui/types";
 
@@ -33,7 +34,17 @@ export const getProductsList = async (
 	});
 };
 
-export const getProductById = async (id: string) => {
+export const getProductsTotalCount = async (): Promise<number> => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetTotalCountDocument,
+		{},
+	);
+	return graphqlResponse.productsConnection.aggregate.count;
+};
+
+export const getProductById = async (
+	id: string,
+): Promise<ProductItemType> => {
 	const graphqlResponse = await executeGraphql(
 		ProductGetByIdDocument,
 		{ id: id },
@@ -57,23 +68,26 @@ export const getProductById = async (id: string) => {
 	};
 };
 
-export const getProductsByCategorySlugAndPage = async (
+export const getProductsByCategoryName = async (
+	categoryName: string,
 	pageNumber: number,
-	categorySlug: string,
-) => {
+): Promise<ProductItemType[]> => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
 	const categories = await executeGraphql(
-		ProductsGetByCategorySlugAndPageDocument,
+		ProductsGetByCategoryNameDocument,
 		{
-			slug: categorySlug,
+			name: categoryName,
 			productsPerPage: productsPerPage,
 			offset: offset,
 		},
 	);
 	const products = categories.categories[0]?.products;
+	if (!products) {
+		notFound();
+	}
 
-	return products?.map((product) => {
+	return products.map((product) => {
 		return {
 			id: product.id,
 			category: product.categories[0]?.name || "",
@@ -88,16 +102,12 @@ export const getProductsByCategorySlugAndPage = async (
 	});
 };
 
-export const getProductsByCategorySlugCount = async (
-	categorySlug: string,
-) => {
-	const categories = await executeGraphql(
-		ProductsGetByCategorySlugDocument,
-		{
-			slug: categorySlug,
-		},
+export const getProductsTotalCountByCategoryName = async (
+	categoryName: string,
+): Promise<number> => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetTotalCountByCategoryNameDocument,
+		{ name: categoryName },
 	);
-	const products = categories.categories[0]?.products;
-
-	return products?.length;
+	return graphqlResponse.productsConnection.aggregate.count;
 };

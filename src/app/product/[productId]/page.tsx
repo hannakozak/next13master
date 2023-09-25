@@ -2,19 +2,21 @@ import { type Metadata } from "next";
 import { getProductById } from "@/api/products";
 import { Product } from "@/ui/organisms/Product";
 
+type SingleProductPageProps = {
+	params: { productId: string };
+};
+
 export const generateMetadata = async ({
 	params,
-}: {
-	params: { productId: string };
-}): Promise<Metadata> => {
+}: SingleProductPageProps): Promise<Metadata> => {
 	const product = await getProductById(params.productId);
 
 	const images = product.coverImage ? [product.coverImage.src] : [];
 	return {
-		title: `${product.name} - Next.js Shop`,
+		title: `${product.name}`,
 		description: product.description,
 		openGraph: {
-			title: `${product.name} - Next.js Shop`,
+			title: product.name,
 			description: product.description,
 			images: images,
 		},
@@ -23,9 +25,7 @@ export const generateMetadata = async ({
 
 export default async function SingleProductPage({
 	params,
-}: {
-	params: { productId: string };
-}) {
+}: SingleProductPageProps) {
 	const product = await getProductById(params.productId);
 	return <Product product={product} />;
 }
