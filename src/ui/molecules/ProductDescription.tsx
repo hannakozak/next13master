@@ -1,12 +1,12 @@
-import { type ProductItemType } from "@/ui/types";
+import { type ProductItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
 type ProductDescriptionProps = {
-	product: ProductItemType;
+	product: ProductItemFragment;
 };
 
 export const ProductDescription = ({
-	product: { category, name, price, description },
+	product: { categories, name, price, description },
 }: ProductDescriptionProps) => {
 	return (
 		<div className="flex flex-col gap-8">
@@ -19,10 +19,12 @@ export const ProductDescription = ({
 			</p>
 			<p>{description}</p>
 			<div className="flex flex-row justify-between"></div>
-			<p className="text-sm text-gray-500">
-				<span className="">Category: </span>
-				{category}
-			</p>
+			{categories[0] && (
+				<p className="text-sm text-gray-500">
+					<span className="">Category: </span>
+					{categories[0].name}
+				</p>
+			)}
 			<button className="brighness-100 font-semiboldbold h-14 rounded-md bg-gradient-to-r  from-blue-500 via-blue-800 to-blue-950 text-xl text-white shadow-md hover:brightness-125">
 				Add To Card
 			</button>

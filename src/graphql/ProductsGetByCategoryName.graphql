@@ -1,20 +1,11 @@
 query ProductsGetByCategoryName(
-	$name: String
-	$productsPerPage: Int
-	$offset: Int
+	$name: String!
+	$productsPerPage: Int!
+	$offset: Int!
 ) {
 	categories(where: { name: $name }) {
 		products(first: $productsPerPage, skip: $offset) {
-			id
-			name
-			price
-			description
-			categories(first: 1) {
-				name
-			}
-			images(first: 1) {
-				url
-			}
+			...ProductListItem
 		}
 	}
 }

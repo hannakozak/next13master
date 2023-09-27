@@ -1,10 +1,10 @@
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { ProductListItem } from "@/ui/molecules/ProductListItem";
-import { type ProductItemType } from "@/ui/types";
 
 export const ProductList = ({
 	products,
 }: {
-	products: ProductItemType[];
+	products: ProductListItemFragment[];
 }) => {
 	return (
 		<ul
@@ -13,7 +13,7 @@ export const ProductList = ({
 		>
 			{products.map((product) => {
 				return (
-					<li key={product.id}>
+					<li key={product.name}>
 						<ProductListItem product={product} />
 					</li>
 				);

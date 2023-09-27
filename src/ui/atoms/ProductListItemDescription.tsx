@@ -1,12 +1,12 @@
-import { type ProductItemType } from "@/ui/types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
 type ProductListItemDescriptionProps = {
-	product: ProductItemType;
+	product: ProductListItemFragment;
 };
 
 export const ProductListItemDescription = ({
-	product: { category, name, price },
+	product: { categories, name, price },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<div className="m-2">
@@ -19,10 +19,12 @@ export const ProductListItemDescription = ({
 					{formatMoney(price / 100)}
 				</p>
 			</div>
-			<p className="text-sm text-gray-500">
-				<span className="sr-only">Kategoria</span>
-				{category}
-			</p>
+			{categories[0] && (
+				<p className="text-sm text-gray-500">
+					<span className="sr-only">Kategoria</span>
+					{categories[0].name}
+				</p>
+			)}
 		</div>
 	);
 };

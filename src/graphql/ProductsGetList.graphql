@@ -1,19 +1,5 @@
-query ProductsGetList($productsPerPage: Int, $offset: Int) {
+query ProductsGetList($productsPerPage: Int!, $offset: Int!) {
 	products(first: $productsPerPage, skip: $offset) {
-		id
-		name
-		price
-		description
-		categories(first: 1) {
-			name
-		}
-		images(first: 1) {
-			url
-		}
-	}
-	productsConnection {
-		aggregate {
-			count
-		}
+		...ProductListItem
 	}
 }

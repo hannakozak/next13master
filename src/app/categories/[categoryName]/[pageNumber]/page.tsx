@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
 import {
 	getProductsByCategoryName,
@@ -19,7 +20,7 @@ export const generateMetadata = async ({
 	return {
 		title: category?.name,
 		openGraph: {
-			title: category.name,
+			title: category?.name,
 		},
 	};
 };
@@ -31,6 +32,9 @@ export default async function CategoryProductPage({
 		params.categoryName,
 		params.pageNumber,
 	);
+	if (!products) {
+		notFound();
+	}
 	const productsTotalCount =
 		await getProductsTotalCountByCategoryName(params.categoryName);
 

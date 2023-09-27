@@ -1,4 +1,5 @@
 import { type Metadata } from "next";
+import { notFound } from "next/navigation";
 import {
 	getCollectionBySlug,
 	getProductsByCollectionSlug,
@@ -18,7 +19,7 @@ export const generateMetadata = async ({
 	return {
 		title: collection?.name,
 		openGraph: {
-			title: collection.name,
+			title: collection?.name,
 		},
 	};
 };
@@ -26,10 +27,16 @@ export default async function CollectionProductPage({
 	params,
 }: CollectionProductPageProps) {
 	const collection = await getCollectionBySlug(params.collectionSlug);
+	if (!collection) {
+		notFound();
+	}
 	const products = await getProductsByCollectionSlug(
 		params.collectionSlug,
 		params.pageNumber,
 	);
+	if (!products) {
+		notFound();
+	}
 	const productsTotalCount =
 		await getProductsTotalCountByCollectionSlug(
 			params.collectionSlug,
