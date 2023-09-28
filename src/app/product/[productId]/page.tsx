@@ -1,8 +1,10 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { getProductById } from "@/api/products";
 import { Product } from "@/ui/organisms/Product";
 import { type ProductListItemFragment } from "@/gql/graphql";
+import { SuggestedProducts } from "@/ui/organisms/SuggesedProducts";
 
 type SingleProductPageProps = {
 	params: { productId: ProductListItemFragment["id"] };
@@ -32,5 +34,19 @@ export default async function SingleProductPage({
 	if (!product) {
 		return notFound();
 	}
-	return <Product product={product} />;
+
+	const category = product?.categories[0]
+		? product.categories[0].name
+		: "";
+
+	return (
+		<>
+			<Product product={product} />
+			<aside data-testid="related-products">
+				<Suspense>
+					<SuggestedProducts category={category} />
+				</Suspense>
+			</aside>
+		</>
+	);
 }

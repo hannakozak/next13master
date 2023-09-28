@@ -8,7 +8,7 @@ type ProductProps = {
 
 export const Product = async ({ product }: ProductProps) => {
 	return (
-		<article className="my-12 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
+		<article className="mx-auto my-12 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
 			{product.images[0] && (
 				<ProductCoverImage src={product.images[0].url} alt="" />
 			)}

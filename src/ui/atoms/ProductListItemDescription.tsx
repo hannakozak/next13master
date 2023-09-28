@@ -11,9 +11,9 @@ export const ProductListItemDescription = ({
 	return (
 		<div className="m-2">
 			<div className="flex flex-row justify-between">
-				<h1 className="text-sm font-semibold text-gray-700">
+				<h2 className="text-sm font-semibold text-gray-700">
 					{name}
-				</h1>
+				</h2>
 				<p className="text-sm font-medium text-gray-900">
 					<span className="sr-only">Cena:</span>
 					{formatMoney(price / 100)}
