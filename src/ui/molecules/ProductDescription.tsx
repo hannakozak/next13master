@@ -1,3 +1,4 @@
+import { VariantsList } from "../organisms/VariantsList";
 import { type ProductItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
@@ -6,7 +7,7 @@ type ProductDescriptionProps = {
 };
 
 export const ProductDescription = ({
-	product: { categories, name, price, description },
+	product: { id, categories, name, price, description },
 }: ProductDescriptionProps) => {
 	return (
 		<div className="flex flex-col gap-8">
@@ -17,14 +18,15 @@ export const ProductDescription = ({
 				<span className="sr-only">Cena:</span>
 				{formatMoney(price / 100)}
 			</p>
-			<p>{description}</p>
-			<div className="flex flex-row justify-between"></div>
 			{categories[0] && (
 				<p className="text-sm text-gray-500">
 					<span className="">Category: </span>
 					{categories[0].name}
 				</p>
 			)}
+			<p>{description}</p>
+			<VariantsList productId={id} />
+
 			<button className="brighness-100 font-semiboldbold h-14 rounded-md bg-gradient-to-r  from-blue-500 via-blue-800 to-blue-950 text-xl text-white shadow-md hover:brightness-125">
 				Add To Card
 			</button>

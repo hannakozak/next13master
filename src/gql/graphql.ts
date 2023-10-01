@@ -10799,6 +10799,27 @@ export type ProductsGetTotalCountByCategoryNameQueryVariables = Exact<{
 
 export type ProductsGetTotalCountByCategoryNameQuery = { productsConnection: { aggregate: { count: number } } };
 
+export type VariantsGetColorQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type VariantsGetColorQuery = { product?: { variants: Array<{ id: string, name: string, color: ProductColor } | {}> } | null };
+
+export type VariantsGetListQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type VariantsGetListQuery = { product?: { variants: Array<{ __typename: 'ProductColorVariant' } | { __typename: 'ProductSizeColorVariant' } | { __typename: 'ProductSizeVariant' }> } | null };
+
+export type VariantsGetSizeColorQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type VariantsGetSizeColorQuery = { product?: { variants: Array<{ name: string, size: ProductSize, color: ProductColor } | {}> } | null };
+
 export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
@@ -10999,3 +11020,38 @@ export const ProductsGetTotalCountByCategoryNameDocument = new TypedDocumentStri
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetTotalCountByCategoryNameQuery, ProductsGetTotalCountByCategoryNameQueryVariables>;
+export const VariantsGetColorDocument = new TypedDocumentString(`
+    query VariantsGetColor($id: ID!) {
+  product(where: {id: $id}) {
+    variants {
+      ... on ProductColorVariant {
+        id
+        name
+        color
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<VariantsGetColorQuery, VariantsGetColorQueryVariables>;
+export const VariantsGetListDocument = new TypedDocumentString(`
+    query VariantsGetList($id: ID!) {
+  product(where: {id: $id}) {
+    variants {
+      __typename
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<VariantsGetListQuery, VariantsGetListQueryVariables>;
+export const VariantsGetSizeColorDocument = new TypedDocumentString(`
+    query VariantsGetSizeColor($id: ID!) {
+  product(where: {id: $id}) {
+    variants {
+      ... on ProductSizeColorVariant {
+        name
+        size
+        color
+      }
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<VariantsGetSizeColorQuery, VariantsGetSizeColorQueryVariables>;

@@ -1,0 +1,7 @@
+query VariantsGetList($id: ID!) {
+	product(where: { id: $id }) {
+		variants {
+			__typename
+		}
+	}
+}

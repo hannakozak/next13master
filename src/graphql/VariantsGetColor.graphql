@@ -1,0 +1,11 @@
+query VariantsGetColor($id: ID!) {
+	product(where: { id: $id }) {
+		variants {
+			... on ProductColorVariant {
+				id
+				name
+				color
+			}
+		}
+	}
+}

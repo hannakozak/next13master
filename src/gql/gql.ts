@@ -29,6 +29,9 @@ const documents = {
     "query ProductsGetList($productsPerPage: Int!, $offset: Int!) {\n  products(first: $productsPerPage, skip: $offset) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetTotalCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountDocument,
     "query ProductsGetTotalCountByCategoryName($name: String!) {\n  productsConnection(where: {categories_some: {name: $name}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountByCategoryNameDocument,
+    "query VariantsGetColor($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductColorVariant {\n        id\n        name\n        color\n      }\n    }\n  }\n}": types.VariantsGetColorDocument,
+    "query VariantsGetList($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      __typename\n    }\n  }\n}": types.VariantsGetListDocument,
+    "query VariantsGetSizeColor($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductSizeColorVariant {\n        name\n        size\n        color\n      }\n    }\n  }\n}": types.VariantsGetSizeColorDocument,
 };
 
 /**
@@ -91,6 +94,18 @@ export function graphql(source: "query ProductsGetTotalCount {\n  productsConnec
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsGetTotalCountByCategoryName($name: String!) {\n  productsConnection(where: {categories_some: {name: $name}}) {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetTotalCountByCategoryNameDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query VariantsGetColor($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductColorVariant {\n        id\n        name\n        color\n      }\n    }\n  }\n}"): typeof import('./graphql').VariantsGetColorDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query VariantsGetList($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      __typename\n    }\n  }\n}"): typeof import('./graphql').VariantsGetListDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query VariantsGetSizeColor($id: ID!) {\n  product(where: {id: $id}) {\n    variants {\n      ... on ProductSizeColorVariant {\n        name\n        size\n        color\n      }\n    }\n  }\n}"): typeof import('./graphql').VariantsGetSizeColorDocument;
 
 
 export function graphql(source: string) {
