@@ -14,7 +14,12 @@ export const ProductListItem = ({
 		<Link href={`/product/${product.id}`} aria-busy={false}>
 			<article>
 				{product.images[0] && (
-					<ProductCoverImage src={product.images[0].url} alt="" />
+					<ProductCoverImage
+						src={product.images[0].url}
+						alt={product.name}
+						width={256}
+						height={256}
+					/>
 				)}
 				<ProductListItemDescription product={product} />
 			</article>
