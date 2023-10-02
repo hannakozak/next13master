@@ -21,7 +21,7 @@ const navLinks: NavLinksProps[] = [
 ];
 export const Navigation = () => {
 	return (
-		<nav className="border-b-2 p-3">
+		<nav>
 			<ul className="flex justify-center">
 				{navLinks.map(({ href, label, exact }) => (
 					<li key={label} className="px-2">

@@ -17,7 +17,7 @@ export default async function RootLayout({
 }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={`${inter.className} container`}>
 				<Header />
 				<main className="container mx-auto mb-20 mt-5 p-3 sm:p-12 lg:max-w-7xl">
 					{children}
