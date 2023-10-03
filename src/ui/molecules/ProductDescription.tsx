@@ -26,10 +26,6 @@ export const ProductDescription = ({
 			)}
 			<p>{description}</p>
 			<VariantsList productId={id} />
-
-			<button className="brighness-100 font-semiboldbold h-14 rounded-md bg-gradient-to-r  from-blue-500 via-blue-800 to-blue-950 text-xl text-white shadow-md hover:brightness-125">
-				Add To Card
-			</button>
 		</div>
 	);
 };

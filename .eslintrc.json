@@ -79,5 +79,13 @@
 			}
 		}
 	],
-	"ignorePatterns": ["*.js", "*.jsx"]
+	"ignorePatterns": ["*.js", "*.jsx"],
+	"@typescript-eslint/no-misused-promises": [
+		"error",
+		{
+			"checksVoidReturn": {
+				"attributes": false
+			}
+		}
+	]
 }
