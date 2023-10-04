@@ -1,9 +1,9 @@
 import { ProductDescription } from "../molecules/ProductDescription";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
-import { cookies } from "next/headers";
 import { ProductItemFragment } from "@/gql/graphql";
 import { AddToCartButton } from "../atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
+import { revalidateTag } from "next/cache";
 
 type ProductProps = {
 	product: ProductItemFragment;
@@ -11,12 +11,10 @@ type ProductProps = {
 export const Product = async ({ product }: ProductProps) => {
 	async function addToCartAction(_formData: FormData) {
 		"use server";
+
 		const cart = await getOrCreateCart();
-		cookies().set("cartId", cart.id, {
-			httpOnly: true,
-			sameSite: "lax",
-		});
 		await addToCart(cart.id, product.id);
+		revalidateTag("cart");
 	}
 
 	return (
