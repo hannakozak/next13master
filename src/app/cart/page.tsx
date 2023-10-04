@@ -2,6 +2,7 @@ import { getCartFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { redirect } from "next/navigation";
 import { ChangeProductQuantity } from "./ChangeProductQuantity";
+import { RemoveButton } from "./RemoveButton";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -31,6 +32,9 @@ export default async function CartPage() {
 										/>
 									</td>
 									<td>{formatMoney(item.product.price / 100)}</td>
+									<td className="px-4 py-2">
+										<RemoveButton productId={item.id} />
+									</td>
 								</tr>
 							),
 					)}
