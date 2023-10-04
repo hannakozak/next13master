@@ -12,31 +12,31 @@ import {
 export const getProductsList = async (pageNumber: number) => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
-	const graphqlResponse = await executeGraphql(
-		ProductsGetListDocument,
-		{ productsPerPage: productsPerPage, offset: offset },
-	);
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetListDocument,
+		variables: { productsPerPage: productsPerPage, offset: offset },
+	});
 
 	return graphqlResponse.products;
 };
 
 export const getProductsTotalCount = async () => {
-	const graphqlResponse = await executeGraphql(
-		ProductsGetTotalCountDocument,
-		{},
-	);
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetTotalCountDocument,
+		variables: {},
+	});
 	return graphqlResponse.productsConnection.aggregate.count;
 };
 
 export const getProductById = async (
 	_id: ProductListItemFragment["id"],
 ) => {
-	const graphqlResponse = await executeGraphql(
-		ProductGetByIdDocument,
-		{
+	const graphqlResponse = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: {
 			id: _id,
 		},
-	);
+	});
 	return graphqlResponse.product;
 };
 
@@ -46,33 +46,33 @@ export const getProductsByCategoryName = async (
 ) => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
-	const data = await executeGraphql(
-		ProductsGetByCategoryNameDocument,
-		{
+	const data = await executeGraphql({
+		query: ProductsGetByCategoryNameDocument,
+		variables: {
 			name: categoryName,
 			productsPerPage: productsPerPage,
 			offset: offset,
 		},
-	);
+	});
 	return data.categories[0]?.products;
 };
 
 export const getProductsTotalCountByCategoryName = async (
 	categoryName: string,
 ) => {
-	const graphqlResponse = await executeGraphql(
-		ProductsGetTotalCountByCategoryNameDocument,
-		{ name: categoryName },
-	);
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetTotalCountByCategoryNameDocument,
+		variables: { name: categoryName },
+	});
 	return graphqlResponse.productsConnection.aggregate.count;
 };
 
 export const getProductsListBySearchQuery = async (
 	_search: string,
 ) => {
-	const graphqlResponse = await executeGraphql(
-		ProductsGetListBySearchQueryDocument,
-		{ search: _search },
-	);
+	const graphqlResponse = await executeGraphql({
+		query: ProductsGetListBySearchQueryDocument,
+		variables: { search: _search },
+	});
 	return graphqlResponse.products;
 };

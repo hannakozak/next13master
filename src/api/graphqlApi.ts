@@ -1,10 +1,16 @@
 import { type TypedDocumentString } from "@/gql/graphql";
 
-export const executeGraphql = async <TResult, TVariables>(
-	query: TypedDocumentString<TResult, TVariables>,
-	variables: TVariables,
-	cache?: string,
-): Promise<TResult> => {
+export const executeGraphql = async <TResult, TVariables>({
+	query,
+	variables,
+	next,
+	cache,
+}: {
+	query: TypedDocumentString<TResult, TVariables>;
+	variables: TVariables;
+	next?: NextFetchRequestConfig;
+	cache?: RequestCache;
+}): Promise<TResult> => {
 	const token = process.env.PERMANENT_AUTH_TOKEN;
 	if (!token) throw TypeError("PERMANENT_AUTH_TOKEN is not defined");
 
@@ -20,6 +26,7 @@ export const executeGraphql = async <TResult, TVariables>(
 			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
+		next,
 		cache: cache ? "no-cache" : "default",
 	});
 

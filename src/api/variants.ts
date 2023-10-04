@@ -9,12 +9,12 @@ import {
 export const getVariantsList = async (
 	_id: ProductListItemFragment["id"],
 ) => {
-	const graphqlResponse = await executeGraphql(
-		VariantsGetListDocument,
-		{
+	const graphqlResponse = await executeGraphql({
+		query: VariantsGetListDocument,
+		variables: {
 			id: _id,
 		},
-	);
+	});
 
 	return graphqlResponse.product?.variants[0]?.__typename ?? [];
 };
@@ -22,12 +22,12 @@ export const getVariantsList = async (
 export const getColorVariants = async (
 	_id: ProductListItemFragment["id"],
 ) => {
-	const graphqlResponse = await executeGraphql(
-		VariantsGetColorDocument,
-		{
+	const graphqlResponse = await executeGraphql({
+		query: VariantsGetColorDocument,
+		variables: {
 			id: _id,
 		},
-	);
+	});
 
 	return graphqlResponse.product?.variants;
 };
@@ -35,12 +35,12 @@ export const getColorVariants = async (
 export const getSizeColorVariants = async (
 	_id: ProductListItemFragment["id"],
 ) => {
-	const graphqlResponse = await executeGraphql(
-		VariantsGetSizeColorDocument,
-		{
+	const graphqlResponse = await executeGraphql({
+		query: VariantsGetSizeColorDocument,
+		variables: {
 			id: _id,
 		},
-	);
+	});
 
 	return graphqlResponse.product?.variants;
 };
