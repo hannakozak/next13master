@@ -1,6 +1,7 @@
 import { getCartFromCookies } from "@/api/cart";
 import { formatMoney } from "@/utils";
 import { redirect } from "next/navigation";
+import { IncrementProductQuantity } from "./IncrementProductQuantity";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -23,7 +24,12 @@ export default async function CartPage() {
 							item.product && (
 								<tr key={item.id}>
 									<td>{item.product.name}</td>
-									<td className="text-center">{item.quantity}</td>
+									<td className="text-center">
+										<IncrementProductQuantity
+											quantity={item.quantity}
+											itemId={item.id}
+										/>
+									</td>
 									<td>{formatMoney(item.product.price / 100)}</td>
 								</tr>
 							),
