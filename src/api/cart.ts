@@ -4,12 +4,14 @@ import {
 	CartCreateDocument,
 	ProductGetByIdDocument,
 	CartAddProductDocument,
+	CartSetProductQuantityDocument,
 } from "@/gql/graphql";
 import { cookies } from "next/headers";
 import { executeGraphql } from "./graphqlApi";
 
 export async function getOrCreateCart(): Promise<CartFragment> {
 	const existingCart = await getCartFromCookies();
+
 	if (existingCart) {
 		return existingCart;
 	}
@@ -55,23 +57,42 @@ export function createCart() {
 }
 
 export async function addToCart(orderId: string, productId: string) {
-	const { product } = await executeGraphql({
-		query: ProductGetByIdDocument,
-		variables: {
-			id: productId,
-		},
-		cache: "no-store",
-	});
-	if (!product) {
-		throw new Error("Product not found");
+	const existingCart = await getCartFromCookies();
+	const productInCart = existingCart?.orderItems.find(
+		(item) => item?.product?.id === productId,
+	);
+
+	if (!productInCart) {
+		const { product } = await executeGraphql({
+			query: ProductGetByIdDocument,
+			variables: {
+				id: productId,
+			},
+			cache: "no-store",
+		});
+		if (!product) {
+			throw new Error("Product not found");
+		}
+		await executeGraphql({
+			query: CartAddProductDocument,
+			variables: {
+				orderId,
+				productId,
+				total: product?.price,
+			},
+			cache: "no-store",
+		});
+	} else {
+		await executeGraphql({
+			query: CartSetProductQuantityDocument,
+			variables: {
+				itemId: productInCart.id,
+				quantity: productInCart.quantity + 1,
+			},
+			cache: "no-store",
+			next: {
+				tags: ["cart"],
+			},
+		});
 	}
-	await executeGraphql({
-		query: CartAddProductDocument,
-		variables: {
-			orderId,
-			productId,
-			total: product?.price,
-		},
-		cache: "no-store",
-	});
 }
