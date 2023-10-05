@@ -10,6 +10,9 @@ export const getCollectionsList = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: CollectionsGetListDocument,
 		variables: {},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 	return graphqlResponse.collections;
 };

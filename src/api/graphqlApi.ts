@@ -27,7 +27,7 @@ export const executeGraphql = async <TResult, TVariables>({
 			Authorization: `Bearer ${token}`,
 		},
 		next,
-		cache: cache ? "no-cache" : "default",
+		cache,
 	});
 
 	type GraphQLResponse<T> =

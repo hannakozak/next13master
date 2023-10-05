@@ -14,6 +14,9 @@ export const getVariantsList = async (
 		variables: {
 			id: _id,
 		},
+		next: {
+			revalidate: 15,
+		},
 	});
 
 	return graphqlResponse.product?.variants[0]?.__typename ?? [];
@@ -27,6 +30,9 @@ export const getColorVariants = async (
 		variables: {
 			id: _id,
 		},
+		next: {
+			revalidate: 15,
+		},
 	});
 
 	return graphqlResponse.product?.variants;
@@ -39,6 +45,9 @@ export const getSizeColorVariants = async (
 		query: VariantsGetSizeColorDocument,
 		variables: {
 			id: _id,
+		},
+		next: {
+			revalidate: 15,
 		},
 	});
 

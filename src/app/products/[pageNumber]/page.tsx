@@ -9,7 +9,7 @@ type ProductsPageProps = {
 	params: { pageNumber: number };
 };
 
-export const generateStaticParams = async () => {
+/*export const generateStaticParams = async () => {
 	const productsTotalCount = await getProductsTotalCount();
 	const productsPerPage = 4;
 	const numberGeneretedPages = Math.ceil(
@@ -19,7 +19,7 @@ export const generateStaticParams = async () => {
 	return Array.from({ length: numberGeneretedPages }, (_, index) => ({
 		pageNumber: (index + 1).toString(),
 	}));
-};
+};*/
 
 export default async function Products({
 	params,

@@ -35,6 +35,7 @@ export async function getCartFromCookies() {
 			variables: {
 				id: cartId,
 			},
+			cache: "no-store",
 			next: {
 				tags: ["cart"],
 			},
@@ -46,7 +47,11 @@ export async function getCartFromCookies() {
 }
 
 export function createCart() {
-	return executeGraphql({ query: CartCreateDocument, variables: {} });
+	return executeGraphql({
+		query: CartCreateDocument,
+		variables: {},
+		cache: "no-store",
+	});
 }
 
 export async function addToCart(orderId: string, productId: string) {
@@ -55,6 +60,7 @@ export async function addToCart(orderId: string, productId: string) {
 		variables: {
 			id: productId,
 		},
+		cache: "no-store",
 	});
 	if (!product) {
 		throw new Error("Product not found");
@@ -66,5 +72,6 @@ export async function addToCart(orderId: string, productId: string) {
 			productId,
 			total: product?.price,
 		},
+		cache: "no-store",
 	});
 }

@@ -8,6 +8,9 @@ export const getCategoriesList = async () => {
 	const graphqlResponse = await executeGraphql({
 		query: CategoriesGetListDocument,
 		variables: {},
+		next: {
+			revalidate: 60 * 60 * 24,
+		},
 	});
 	return graphqlResponse.categories;
 };
