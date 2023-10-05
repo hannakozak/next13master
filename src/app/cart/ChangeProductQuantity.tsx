@@ -2,6 +2,7 @@
 
 import { experimental_useOptimistic as useOptimistic } from "react";
 import { changeItemQuantity } from "./actions";
+import { useRouter } from "next/navigation";
 
 type ChangeProductQuantityProps = {
 	quantity: number;
@@ -12,6 +13,7 @@ export const ChangeProductQuantity = ({
 	quantity,
 	itemId,
 }: ChangeProductQuantityProps) => {
+	const router = useRouter();
 	const [optimisticQuantity, setOptimisticQuantity] =
 		useOptimistic(quantity);
 	return (
@@ -22,6 +24,7 @@ export const ChangeProductQuantity = ({
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity - 1);
 					await changeItemQuantity(itemId, optimisticQuantity - 1);
+					router.refresh();
 				}}
 			>
 				-
@@ -33,6 +36,7 @@ export const ChangeProductQuantity = ({
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
 					await changeItemQuantity(itemId, optimisticQuantity + 1);
+					router.refresh();
 				}}
 			>
 				+
