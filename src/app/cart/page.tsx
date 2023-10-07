@@ -3,6 +3,7 @@ import { formatMoney } from "@/utils";
 import { redirect } from "next/navigation";
 import { ChangeProductQuantity } from "./ChangeProductQuantity";
 import { RemoveButton } from "./RemoveButton";
+import { handleStripePaymentAction } from "./actions";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -40,6 +41,14 @@ export default async function CartPage() {
 					)}
 				</tbody>
 			</table>
+			<form action={handleStripePaymentAction} className="ml-auto">
+				<button
+					type="submit"
+					className="rounded-sm border bg-slate-100 px-8 py-2 shadow-sm transition-colors hover:bg-slate-200"
+				>
+					Pay
+				</button>
+			</form>
 		</div>
 	);
 }
