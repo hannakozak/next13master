@@ -29,6 +29,7 @@ export const Product = async ({ product }: ProductProps) => {
 			)}
 			<aside>
 				<ProductDescription product={product} />
+				<div></div>
 				<form action={addToCartAction}>
 					<AddToCartButton />
 				</form>

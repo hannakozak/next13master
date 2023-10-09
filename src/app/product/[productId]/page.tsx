@@ -5,6 +5,8 @@ import { getProductById } from "@/api/products";
 import { Product } from "@/ui/organisms/Product";
 import { type ProductListItemFragment } from "@/gql/graphql";
 import { SuggestedProducts } from "@/ui/organisms/SuggesedProducts";
+import { getReviewsByProductId } from "@/api/reviews";
+import { AddReview } from "../AddReview";
 
 type SingleProductPageProps = {
 	params: { productId: ProductListItemFragment["id"] };
@@ -35,6 +37,8 @@ export default async function SingleProductPage({
 		return notFound();
 	}
 
+	const reviews = await getReviewsByProductId(params.productId);
+
 	const category = product?.categories[0]
 		? product.categories[0].name
 		: "";
@@ -46,6 +50,9 @@ export default async function SingleProductPage({
 				<Suspense>
 					<SuggestedProducts category={category} />
 				</Suspense>
+			</aside>
+			<aside>
+				<AddReview reviews={reviews} productId={params.productId} />
 			</aside>
 		</>
 	);

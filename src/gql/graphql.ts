@@ -10844,6 +10844,34 @@ export type ProductsGetTotalCountByCategoryNameQueryVariables = Exact<{
 
 export type ProductsGetTotalCountByCategoryNameQuery = { productsConnection: { aggregate: { count: number } } };
 
+export type ReviewCreateMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  headline: Scalars['String']['input'];
+  content: Scalars['String']['input'];
+  rating: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
+  email: Scalars['String']['input'];
+}>;
+
+
+export type ReviewCreateMutation = { createReview?: { id: string } | null };
+
+export type ReviewGetByProductIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewGetByProductIdQuery = { reviewsConnection: { edges: Array<{ node: { id: string, headline: string, content: string, rating: number, name: string, email: string } }> } };
+
+export type ReviewItemFragment = { id: string, headline: string, content: string, rating: number, name: string, email: string };
+
+export type ReviewPublishMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type ReviewPublishMutation = { publishReview?: { id: string } | null };
+
 export type VariantsGetColorQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -10935,6 +10963,16 @@ export const ProductListItemFragmentDoc = new TypedDocumentString(`
   price
 }
     `, {"fragmentName":"ProductListItem"}) as unknown as TypedDocumentString<ProductListItemFragment, unknown>;
+export const ReviewItemFragmentDoc = new TypedDocumentString(`
+    fragment ReviewItem on Review {
+  id
+  headline
+  content
+  rating
+  name
+  email
+}
+    `, {"fragmentName":"ReviewItem"}) as unknown as TypedDocumentString<ReviewItemFragment, unknown>;
 export const CartAddProductDocument = new TypedDocumentString(`
     mutation CartAddProduct($orderId: ID!, $total: Int!, $productId: ID!) {
   createOrderItem(
@@ -11158,6 +11196,40 @@ export const ProductsGetTotalCountByCategoryNameDocument = new TypedDocumentStri
   }
 }
     `) as unknown as TypedDocumentString<ProductsGetTotalCountByCategoryNameQuery, ProductsGetTotalCountByCategoryNameQueryVariables>;
+export const ReviewCreateDocument = new TypedDocumentString(`
+    mutation ReviewCreate($id: ID!, $headline: String!, $content: String!, $rating: Int!, $name: String!, $email: String!) {
+  createReview(
+    data: {headline: $headline, content: $content, rating: $rating, name: $name, email: $email, product: {connect: {id: $id}}}
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewCreateMutation, ReviewCreateMutationVariables>;
+export const ReviewGetByProductIdDocument = new TypedDocumentString(`
+    query ReviewGetByProductId($id: ID!) {
+  reviewsConnection(where: {product: {id: $id}}) {
+    edges {
+      node {
+        ...ReviewItem
+      }
+    }
+  }
+}
+    fragment ReviewItem on Review {
+  id
+  headline
+  content
+  rating
+  name
+  email
+}`) as unknown as TypedDocumentString<ReviewGetByProductIdQuery, ReviewGetByProductIdQueryVariables>;
+export const ReviewPublishDocument = new TypedDocumentString(`
+    mutation ReviewPublish($id: ID!) {
+  publishReview(where: {id: $id}, to: PUBLISHED) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<ReviewPublishMutation, ReviewPublishMutationVariables>;
 export const VariantsGetColorDocument = new TypedDocumentString(`
     query VariantsGetColor($id: ID!) {
   product(where: {id: $id}) {
