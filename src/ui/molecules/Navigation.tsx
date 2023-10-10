@@ -18,6 +18,11 @@ const navLinks: NavLinksProps[] = [
 		label: "Accessories",
 		exact: false,
 	},
+	{
+		href: "/cart",
+		label: "Cart",
+		exact: false,
+	},
 ];
 export const Navigation = () => {
 	return (
