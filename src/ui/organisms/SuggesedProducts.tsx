@@ -11,7 +11,7 @@ const wait = (ms: number) =>
 export const SuggestedProducts = async ({
 	category,
 }: SuggestedProductsProps) => {
-	const products = await getProductsByCategoryName(category, 1);
+	const products = await getProductsByCategoryName(category);
 	if (!products) {
 		return notFound();
 	}

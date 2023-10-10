@@ -7,9 +7,12 @@ import {
 } from "@/api/collections";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { SortInput } from "@/ui/molecules/SortInput";
+import { ProductOrderByInput } from "@/gql/graphql";
 
 type CollectionProductPageProps = {
 	params: { pageNumber: number; collectionSlug: string };
+	searchParams: { sort: ProductOrderByInput };
 };
 
 export const generateMetadata = async ({
@@ -25,6 +28,7 @@ export const generateMetadata = async ({
 };
 export default async function CollectionProductPage({
 	params,
+	searchParams,
 }: CollectionProductPageProps) {
 	const collection = await getCollectionBySlug(params.collectionSlug);
 	if (!collection) {
@@ -33,6 +37,7 @@ export default async function CollectionProductPage({
 	const products = await getProductsByCollectionSlug(
 		params.collectionSlug,
 		params.pageNumber,
+		searchParams.sort,
 	);
 	if (!products) {
 		notFound();
@@ -45,6 +50,7 @@ export default async function CollectionProductPage({
 	return (
 		<>
 			<h1>{collection.name}</h1>
+			<SortInput />
 			<ProductList products={products} />
 			<Pagination
 				currentPage={params.pageNumber}

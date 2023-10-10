@@ -1,5 +1,13 @@
-query ProductsGetList($productsPerPage: Int!, $offset: Int!) {
-	products(first: $productsPerPage, skip: $offset) {
+query ProductsGetList(
+	$orderBy: ProductOrderByInput
+	$productsPerPage: Int!
+	$offset: Int!
+) {
+	products(
+		orderBy: $orderBy
+		first: $productsPerPage
+		skip: $offset
+	) {
 		...ProductListItem
 	}
 }

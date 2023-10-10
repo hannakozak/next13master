@@ -10785,6 +10785,7 @@ export type CollectionsGetProductsByCollectionSlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']['input']>;
   productsPerPage?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
@@ -10812,12 +10813,14 @@ export type ProductsGetByCategoryNameQueryVariables = Exact<{
   name: Scalars['String']['input'];
   productsPerPage: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
+  orderBy?: InputMaybe<ProductOrderByInput>;
 }>;
 
 
 export type ProductsGetByCategoryNameQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
 export type ProductsGetListQueryVariables = Exact<{
+  orderBy?: InputMaybe<ProductOrderByInput>;
   productsPerPage: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
 }>;
@@ -11079,9 +11082,9 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   slug
 }`) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
 export const CollectionsGetProductsByCollectionSlugDocument = new TypedDocumentString(`
-    query CollectionsGetProductsByCollectionSlug($slug: String, $productsPerPage: Int, $offset: Int) {
+    query CollectionsGetProductsByCollectionSlug($slug: String, $productsPerPage: Int, $offset: Int, $orderBy: ProductOrderByInput) {
   collections(where: {slug: $slug}) {
-    products(first: $productsPerPage, skip: $offset) {
+    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {
       ...ProductItem
     }
   }
@@ -11126,9 +11129,9 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
-    query ProductsGetByCategoryName($name: String!, $productsPerPage: Int!, $offset: Int!) {
+    query ProductsGetByCategoryName($name: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {
   categories(where: {name: $name}) {
-    products(first: $productsPerPage, skip: $offset) {
+    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {
       ...ProductListItem
     }
   }
@@ -11145,8 +11148,8 @@ export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCategoryNameQuery, ProductsGetByCategoryNameQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($productsPerPage: Int!, $offset: Int!) {
-  products(first: $productsPerPage, skip: $offset) {
+    query ProductsGetList($orderBy: ProductOrderByInput, $productsPerPage: Int!, $offset: Int!) {
+  products(orderBy: $orderBy, first: $productsPerPage, skip: $offset) {
     ...ProductListItem
   }
 }

@@ -2,9 +2,14 @@ query ProductsGetByCategoryName(
 	$name: String!
 	$productsPerPage: Int!
 	$offset: Int!
+	$orderBy: ProductOrderByInput
 ) {
 	categories(where: { name: $name }) {
-		products(first: $productsPerPage, skip: $offset) {
+		products(
+			first: $productsPerPage
+			skip: $offset
+			orderBy: $orderBy
+		) {
 			...ProductListItem
 		}
 	}

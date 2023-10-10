@@ -1,4 +1,3 @@
-import { VariantsList } from "../organisms/VariantsList";
 import { type ProductItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
@@ -7,7 +6,7 @@ type ProductDescriptionProps = {
 };
 
 export const ProductDescription = ({
-	product: { id, categories, name, price, description },
+	product: { categories, name, price, description },
 }: ProductDescriptionProps) => {
 	return (
 		<div className="flex flex-col gap-8">
@@ -25,7 +24,6 @@ export const ProductDescription = ({
 				</p>
 			)}
 			<p>{description}</p>
-			<VariantsList productId={id} />
 		</div>
 	);
 };

@@ -4,9 +4,12 @@ import {
 	getProductsTotalCount,
 } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
+import { ProductOrderByInput } from "@/gql/graphql";
+import { SortInput } from "@/ui/molecules/SortInput";
 
 type ProductsPageProps = {
 	params: { pageNumber: number };
+	searchParams: { sort: ProductOrderByInput };
 };
 
 /*export const generateStaticParams = async () => {
@@ -23,12 +26,17 @@ type ProductsPageProps = {
 
 export default async function Products({
 	params,
+	searchParams,
 }: ProductsPageProps) {
-	const products = await getProductsList(params.pageNumber);
+	const products = await getProductsList(
+		params.pageNumber,
+		searchParams.sort,
+	);
 	const productsTotalCount = await getProductsTotalCount();
 
 	return (
 		<>
+			<SortInput />
 			<ProductList products={products} />
 			<Pagination
 				currentPage={params.pageNumber}

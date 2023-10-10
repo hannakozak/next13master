@@ -5,6 +5,7 @@ import {
 	CollectionsGetProductsByCollectionSlugDocument,
 	CollectionsGetProductsTotalCountByCollectionSlugDocument,
 } from "@/gql/graphql";
+import { ProductOrderByInput } from "@/gql/graphql";
 
 export const getCollectionsList = async () => {
 	const graphqlResponse = await executeGraphql({
@@ -38,6 +39,7 @@ export const getProductsTotalCountByCollectionSlug = async (
 export const getProductsByCollectionSlug = async (
 	collectionSlug: string,
 	pageNumber: number,
+	_orderBy: ProductOrderByInput,
 ) => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
@@ -47,6 +49,7 @@ export const getProductsByCollectionSlug = async (
 			slug: collectionSlug,
 			productsPerPage: productsPerPage,
 			offset: offset,
+			orderBy: _orderBy,
 		},
 	});
 	return graphqlResponse.collections[0]?.products;

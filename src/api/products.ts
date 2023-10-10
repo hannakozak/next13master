@@ -7,14 +7,22 @@ import {
 	ProductsGetTotalCountByCategoryNameDocument,
 	ProductsGetTotalCountDocument,
 	ProductsGetListBySearchQueryDocument,
+	ProductOrderByInput,
 } from "@/gql/graphql";
 
-export const getProductsList = async (pageNumber: number) => {
+export const getProductsList = async (
+	pageNumber: number = 1,
+	_orderBy: ProductOrderByInput = "createdAt_ASC",
+) => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
-		variables: { productsPerPage: productsPerPage, offset: offset },
+		variables: {
+			orderBy: _orderBy,
+			productsPerPage: productsPerPage,
+			offset: offset,
+		},
 		next: {
 			revalidate: 60 * 60 * 24,
 		},
@@ -32,12 +40,12 @@ export const getProductsTotalCount = async () => {
 };
 
 export const getProductById = async (
-	_id: ProductListItemFragment["id"],
+	id: ProductListItemFragment["id"],
 ) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductGetByIdDocument,
 		variables: {
-			id: _id,
+			id: id,
 		},
 		next: {
 			revalidate: 1,
@@ -48,7 +56,8 @@ export const getProductById = async (
 
 export const getProductsByCategoryName = async (
 	categoryName: string,
-	pageNumber: number,
+	pageNumber: number = 1,
+	_orderBy: ProductOrderByInput = "createdAt_ASC",
 ) => {
 	const productsPerPage = 4;
 	const offset = (pageNumber - 1) * productsPerPage;
@@ -58,6 +67,7 @@ export const getProductsByCategoryName = async (
 			name: categoryName,
 			productsPerPage: productsPerPage,
 			offset: offset,
+			orderBy: _orderBy,
 		},
 	});
 	return data.categories[0]?.products;
