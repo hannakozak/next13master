@@ -1,6 +1,9 @@
 import { type UrlObject } from "url";
 import { type Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
+import Link from "next/link";
+import { ShoppingCart } from "lucide-react";
+import { getCartFromCookies } from "@/api/cart";
 
 type NavLinksProps = {
 	href: Route<string> | UrlObject;
@@ -18,13 +21,13 @@ const navLinks: NavLinksProps[] = [
 		label: "Accessories",
 		exact: false,
 	},
-	{
-		href: "/cart",
-		label: "Cart",
-		exact: false,
-	},
 ];
-export const Navigation = () => {
+export const Navigation = async () => {
+	const cart = await getCartFromCookies();
+	const totalQuantity = cart?.orderItems.reduce(
+		(sum, item) => sum + item.quantity,
+		0,
+	);
 	return (
 		<nav>
 			<ul className="flex justify-center">
@@ -40,6 +43,16 @@ export const Navigation = () => {
 						</ActiveLink>
 					</li>
 				))}
+				<Link
+					href={"/cart"}
+					className="group -m-2 flex items-center p-2"
+				>
+					<ShoppingCart />
+					<span className="ml-2 text-sm font-medium">
+						{totalQuantity}
+					</span>
+					<span className="sr-only">Items in cart, view bag</span>
+				</Link>
 			</ul>
 		</nav>
 	);
