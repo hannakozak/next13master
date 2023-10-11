@@ -10,6 +10,7 @@ export function RemoveButton({ productId }: { productId: string }) {
 
 	return (
 		<button
+			data-testid="remove-button"
 			disabled={isPending}
 			onClick={() =>
 				startTransition(async () => {

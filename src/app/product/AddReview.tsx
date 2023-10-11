@@ -91,7 +91,7 @@ export const AddReview = ({
 				</div>
 				<div className="mb-4">
 					<label
-						htmlFor="userName"
+						htmlFor="name"
 						className="mb-2 block font-bold text-gray-700"
 					>
 						Your Name

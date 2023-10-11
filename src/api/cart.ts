@@ -37,10 +37,10 @@ export async function getCartFromCookies() {
 			variables: {
 				id: cartId,
 			},
-			cache: "no-store",
 			next: {
 				tags: ["cart"],
 			},
+			cache: "no-store",
 		});
 		if (cart.order) {
 			return cart.order;
@@ -52,6 +52,7 @@ export function createCart() {
 	return executeGraphql({
 		query: CartCreateDocument,
 		variables: {},
+		next: {},
 		cache: "no-store",
 	});
 }
@@ -68,6 +69,7 @@ export async function addToCart(orderId: string, productId: string) {
 			variables: {
 				id: productId,
 			},
+			next: {},
 			cache: "no-store",
 		});
 		if (!product) {
@@ -80,6 +82,7 @@ export async function addToCart(orderId: string, productId: string) {
 				productId,
 				total: product?.price,
 			},
+			next: {},
 			cache: "no-store",
 		});
 	} else {
@@ -89,10 +92,10 @@ export async function addToCart(orderId: string, productId: string) {
 				itemId: productInCart.id,
 				quantity: productInCart.quantity + 1,
 			},
-			cache: "no-store",
 			next: {
 				tags: ["cart"],
 			},
+			cache: "no-store",
 		});
 	}
 }

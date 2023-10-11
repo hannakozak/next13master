@@ -1,7 +1,7 @@
-import { ProductDescription } from "../molecules/ProductDescription";
+import { ProductDescription } from "@/ui/molecules/ProductDescription";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemFragment } from "@/gql/graphql";
-import { AddToCartButton } from "../atoms/AddToCartButton";
+import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
 import { revalidateTag } from "next/cache";
 

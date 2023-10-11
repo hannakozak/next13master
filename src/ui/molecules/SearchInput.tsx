@@ -31,6 +31,7 @@ export const SearchInput = () => {
 			>
 				<input
 					type="search"
+					name="search"
 					value={searchQuery}
 					onChange={(event) => setSearchQuery(event.target.value)}
 					className="w-50 focus:outline-none"

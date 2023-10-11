@@ -47,9 +47,6 @@ export const getProductById = async (
 		variables: {
 			id: id,
 		},
-		next: {
-			revalidate: 1,
-		},
 	});
 	return graphqlResponse.product;
 };
