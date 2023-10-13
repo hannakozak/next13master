@@ -38,7 +38,7 @@ export const AddReview = ({
 				customers
 			</p>
 
-			<form data-testId="add-review-form">
+			<form data-testid="add-review-form">
 				<div className="mb-4">
 					<label
 						htmlFor="headline"

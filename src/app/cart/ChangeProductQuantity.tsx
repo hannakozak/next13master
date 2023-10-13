@@ -13,8 +13,10 @@ export const ChangeProductQuantity = ({
 	quantity,
 	itemId,
 }: ChangeProductQuantityProps) => {
-	const [optimisticQuantity, setOptimisticQuantity] =
-		useOptimistic(quantity);
+	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
+		quantity,
+		(_state, newQuantity: number) => newQuantity,
+	);
 	const router = useRouter();
 	return (
 		<form className="flex items-center gap-3">

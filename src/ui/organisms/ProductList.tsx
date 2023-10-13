@@ -16,7 +16,9 @@ export const ProductList = ({
 			>
 				{products.map((product) => {
 					return (
-						<ProductListItem product={product} key={product.id} />
+						<li key={product.id}>
+							<ProductListItem product={product} />
+						</li>
 					);
 				})}
 			</ul>

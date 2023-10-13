@@ -20,7 +20,7 @@ export const addReviewAction = async (
 
 	if (!reviewId) {
 		throw TypeError(
-			"Something went wrong during the review creation!",
+			"Failed to create review. Please try again later.",
 		);
 	}
 

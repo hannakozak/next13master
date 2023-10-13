@@ -7,7 +7,8 @@ export const ReviewListItem = ({
 }) => {
 	return (
 		<>
-			{review.name} - {review.rating}
+			{review.name}
+			<p>{review.rating}</p>
 		</>
 	);
 };

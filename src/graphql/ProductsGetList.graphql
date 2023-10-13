@@ -1,5 +1,5 @@
 query ProductsGetList(
-	$orderBy: ProductOrderByInput
+	$orderBy: ProductOrderByInput = name_ASC
 	$productsPerPage: Int!
 	$offset: Int!
 ) {

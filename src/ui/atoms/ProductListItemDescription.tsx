@@ -6,8 +6,9 @@ type ProductListItemDescriptionProps = {
 };
 
 export const ProductListItemDescription = ({
-	product: { categories, name, price },
+	product: { categories, name, price, averageRating },
 }: ProductListItemDescriptionProps) => {
+	console.log(averageRating);
 	return (
 		<div className="m-2">
 			<div className="flex flex-row justify-between">
@@ -28,6 +29,10 @@ export const ProductListItemDescription = ({
 					{categories[0].name}
 				</p>
 			)}
+			<p className="sr-only" data-testid="product-rating">
+				{averageRating}
+			</p>
+			<p>AvarageRating: {averageRating}</p>
 		</div>
 	);
 };

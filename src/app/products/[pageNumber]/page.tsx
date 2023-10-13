@@ -6,6 +6,7 @@ import {
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductOrderByInput } from "@/gql/graphql";
 import { SortInput } from "@/ui/molecules/SortInput";
+import { revalidatePath } from "next/cache";
 
 type ProductsPageProps = {
 	params: { pageNumber: number };
@@ -32,6 +33,7 @@ export default async function Products({
 		params.pageNumber,
 		searchParams.sort,
 	);
+	revalidatePath("/products");
 	const productsTotalCount = await getProductsTotalCount();
 
 	return (

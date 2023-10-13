@@ -29,7 +29,18 @@ export const SortInput = () => {
 			value: "price_DESC",
 			testid: "sort-by-price",
 		},
+		{
+			label: "RatingAsc.",
+			value: "averageRating_ASC",
+			testid: "sort-by-rating",
+		},
+		{
+			label: "RatingDesc.",
+			value: "averageRating_DESC",
+			testid: "sort-by-rating",
+		},
 	];
+
 	return (
 		<>
 			<fieldset>

@@ -6,7 +6,7 @@ type ProductDescriptionProps = {
 };
 
 export const ProductDescription = ({
-	product: { categories, name, price, description },
+	product: { categories, name, price, description, averageRating },
 }: ProductDescriptionProps) => {
 	return (
 		<div className="flex flex-col gap-8">
@@ -23,7 +23,9 @@ export const ProductDescription = ({
 					{categories[0].name}
 				</p>
 			)}
+			<p>Rating: {averageRating}</p>
 			<p>{description}</p>
+			
 		</div>
 	);
 };

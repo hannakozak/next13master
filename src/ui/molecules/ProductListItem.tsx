@@ -11,18 +11,16 @@ export const ProductListItem = ({
 	product,
 }: ProductListItemProps) => {
 	return (
-		<li>
-			<Link href={`/product/${product.id}`}>
-				{product.images[0] && (
-					<ProductCoverImage
-						src={product.images[0].url}
-						alt={product.name}
-						width={256}
-						height={256}
-					/>
-				)}
-				<ProductListItemDescription product={product} />
-			</Link>
-		</li>
+		<Link href={`/product/${product.id}`}>
+			{product.images[0] && (
+				<ProductCoverImage
+					src={product.images[0].url}
+					alt={product.name}
+					width={256}
+					height={256}
+				/>
+			)}
+			<ProductListItemDescription product={product} />
+		</Link>
 	);
 };

@@ -29,7 +29,6 @@ export const changeItemQuantity = async (
 			variables: {
 				itemId,
 			},
-
 			cache: "no-cache",
 		});
 	} else {
