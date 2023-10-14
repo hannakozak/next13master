@@ -38,13 +38,11 @@ export const SizeColorVariants = ({
 		{},
 	);
 
-	console.log(groupedSizesByColor);
-
 	return (
 		<>
 			{Object.entries(groupedSizesByColor).map(([color, sizes]) => {
 				return (
-					<div key={color} className="flex flex-row gap-3">
+					<div key={color} className="flex flex-row gap-3 py-3">
 						<button
 							className="rounded, h-8 w-8"
 							value={searchParams.get(color) || color}

@@ -45,13 +45,13 @@ export const VariantsList = async ({
 	}
 
 	return (
-		<>
+		<div className="py-6">
 			{variant === "ProductColorVariant" && (
 				<ColorVariants colorVariants={colorVariants} />
 			)}
 			{variant === "ProductSizeColorVariant" && (
 				<SizeColorVariants sizeColorVariants={sizeColorVariants} />
 			)}
-		</>
+		</div>
 	);
 };

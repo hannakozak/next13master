@@ -5,6 +5,7 @@ import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
 import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { VariantsList } from "./VariantsList";
 
 type ProductProps = {
 	product: ProductItemFragment;
@@ -31,7 +32,7 @@ export const Product = async ({ product }: ProductProps) => {
 			)}
 			<aside>
 				<ProductDescription product={product} />
-				<div></div>
+				<VariantsList productId={product.id} />
 				<form action={addToCartAction}>
 					<AddToCartButton />
 				</form>

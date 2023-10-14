@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { ChangeProductQuantity } from "./ChangeProductQuantity";
 import { RemoveButton } from "./RemoveButton";
 import { handleStripePaymentAction } from "./actions";
-import { revalidatePath } from "next/cache";
 
 export default async function CartPage() {
 	const cart = await getCartFromCookies();
@@ -12,9 +11,8 @@ export default async function CartPage() {
 		redirect("/");
 	}
 
-	revalidatePath("/cart");
 	return (
-		<div className="mt-10">
+		<div className="mt-10" aria-busy={false}>
 			<table className="table-fixed">
 				<thead>
 					<tr>
