@@ -28,7 +28,7 @@ export async function createReview(review: ReviewItemFragment) {
 	const reviewId = await executeGraphql({
 		query: ReviewCreateDocument,
 		variables: { ...review },
-		next: {},
+		next: { revalidate: 1 },
 		cache: "no-cache",
 	});
 
@@ -39,7 +39,7 @@ export async function publishReview(reviewId: string) {
 	await executeGraphql({
 		query: ReviewPublishDocument,
 		variables: { id: reviewId },
-		next: {},
+		next: { revalidate: 1 },
 		cache: "no-cache",
 	});
 }
