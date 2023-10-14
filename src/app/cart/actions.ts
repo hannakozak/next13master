@@ -6,6 +6,7 @@ import {
 	CartRemoveProductDocument,
 	CartSetProductQuantityDocument,
 } from "@/gql/graphql";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
@@ -23,25 +24,14 @@ export const changeItemQuantity = async (
 	itemId: string,
 	quantity: number,
 ) => {
-	if (quantity === 0) {
-		return executeGraphql({
-			query: CartRemoveProductDocument,
-			variables: {
-				itemId,
-			},
-			cache: "no-cache",
-		});
-	} else {
-		return executeGraphql({
-			query: CartSetProductQuantityDocument,
-			variables: {
-				itemId,
-				quantity,
-			},
-			next: {},
-			cache: "no-cache",
-		});
-	}
+	await executeGraphql({
+		query: CartSetProductQuantityDocument,
+		variables: {
+			itemId,
+			quantity,
+		},
+	});
+	revalidatePath("/cart");
 };
 
 export async function handleStripePaymentAction() {

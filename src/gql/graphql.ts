@@ -10782,12 +10782,12 @@ export type CartRemoveProductMutationVariables = Exact<{
 export type CartRemoveProductMutation = { deleteOrderItem?: { id: string } | null };
 
 export type CartSetProductQuantityMutationVariables = Exact<{
-  itemId: Scalars['ID']['input'];
   quantity: Scalars['Int']['input'];
+  itemId: Scalars['ID']['input'];
 }>;
 
 
-export type CartSetProductQuantityMutation = { updateOrderItem?: { id: string } | null };
+export type CartSetProductQuantityMutation = { updateOrderItem?: { quantity: number } | null };
 
 export type CategoriesGetByNameQueryVariables = Exact<{
   name: Scalars['String']['input'];
@@ -11084,9 +11084,9 @@ export const CartRemoveProductDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<CartRemoveProductMutation, CartRemoveProductMutationVariables>;
 export const CartSetProductQuantityDocument = new TypedDocumentString(`
-    mutation CartSetProductQuantity($itemId: ID!, $quantity: Int!) {
-  updateOrderItem(where: {id: $itemId}, data: {quantity: $quantity}) {
-    id
+    mutation CartSetProductQuantity($quantity: Int!, $itemId: ID!) {
+  updateOrderItem(data: {quantity: $quantity}, where: {id: $itemId}) {
+    quantity
   }
 }
     `) as unknown as TypedDocumentString<CartSetProductQuantityMutation, CartSetProductQuantityMutationVariables>;

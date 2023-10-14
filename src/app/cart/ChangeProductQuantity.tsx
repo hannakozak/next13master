@@ -1,8 +1,10 @@
 "use client";
 
-import { experimental_useOptimistic as useOptimistic } from "react";
+import {
+	experimental_useOptimistic as useOptimistic,
+	useTransition,
+} from "react";
 import { changeItemQuantity } from "./actions";
-import { useRouter } from "next/navigation";
 
 type ChangeProductQuantityProps = {
 	quantity: number;
@@ -17,17 +19,22 @@ export const ChangeProductQuantity = ({
 		quantity,
 		(_state, newQuantity: number) => newQuantity,
 	);
-	const router = useRouter();
+
+	const [isPending] = useTransition();
+
 	return (
 		<form className="flex items-center gap-3">
 			<button
 				data-testid="decrement"
 				className="h-8 w-8 border bg-slate-50"
 				formAction={async () => {
+					if (optimisticQuantity === 1) {
+						return;
+					}
 					setOptimisticQuantity(optimisticQuantity - 1);
 					await changeItemQuantity(itemId, optimisticQuantity - 1);
-					router.refresh();
 				}}
+				disabled={isPending}
 			>
 				-
 			</button>
@@ -38,8 +45,8 @@ export const ChangeProductQuantity = ({
 				formAction={async () => {
 					setOptimisticQuantity(optimisticQuantity + 1);
 					await changeItemQuantity(itemId, optimisticQuantity + 1);
-					router.refresh();
 				}}
+				disabled={isPending}
 			>
 				+
 			</button>

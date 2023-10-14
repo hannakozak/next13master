@@ -39,7 +39,7 @@ export const AddReview = ({
 				customers
 			</p>
 
-			<form data-testid="add-review-form">
+			<form data-testid="add-review-form" action={addReview}>
 				<div className="mb-4">
 					<label
 						htmlFor="headline"
@@ -120,9 +120,7 @@ export const AddReview = ({
 						required
 					/>
 				</div>
-				<form action={addReview}>
-					<AddReviewButton />
-				</form>
+				<AddReviewButton />
 			</form>
 
 			<ul className="flex flex-col">
