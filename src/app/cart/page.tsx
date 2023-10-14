@@ -12,6 +12,7 @@ export default async function CartPage() {
 		redirect("/");
 	}
 	revalidatePath("/cart");
+
 	return (
 		<div className="mt-10" aria-busy={false}>
 			<table className="table-fixed">
