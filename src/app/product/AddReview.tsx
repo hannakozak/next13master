@@ -1,10 +1,11 @@
 "use client";
-import { experimental_useOptimistic as useOptimistic } from "react";
 
+import { experimental_useOptimistic as useOptimistic } from "react";
 import { addReviewAction } from "@/app/product/actions";
 import { useRouter } from "next/navigation";
 import { ReviewItemFragment } from "@/gql/graphql";
 import { ReviewListItem } from "@/ui/molecules/ReviewListItem";
+import { AddReviewButton } from "@/ui/atoms/AddReviewButton";
 
 export const AddReview = ({
 	productId,
@@ -119,14 +120,9 @@ export const AddReview = ({
 						required
 					/>
 				</div>
-				<button
-					formAction={addReview}
-					type="submit"
-					data-testid="add-review-button"
-					className="brighness-100 font-semiboldbold h-14 w-full rounded-md bg-gradient-to-r from-blue-500  via-blue-800 to-blue-950 text-xl text-white shadow-md hover:brightness-125 disabled:cursor-wait disabled:brightness-50"
-				>
-					Add Review
-				</button>
+				<form action={addReview}>
+					<AddReviewButton />
+				</form>
 			</form>
 
 			<ul className="flex flex-col">

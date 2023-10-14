@@ -2,6 +2,7 @@
 
 import { createReview, publishReview } from "@/api/reviews";
 import { ReviewItemFragment } from "@/gql/graphql";
+import { revalidatePath } from "next/cache";
 
 export const addReviewAction = async (
 	productId: string,
@@ -25,4 +26,5 @@ export const addReviewAction = async (
 	}
 
 	await publishReview(reviewId.id);
+	revalidatePath(`/product/${productId}`);
 };

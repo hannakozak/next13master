@@ -7,9 +7,9 @@ export const AddReviewButton = () => {
 	formStatus.pending;
 	return (
 		<button
+			data-testid="add-review-button"
 			type="submit"
 			disabled={formStatus.pending}
-			data-testid="add-review-button"
 			className="brighness-100 font-semiboldbold h-14 w-full rounded-md bg-gradient-to-r from-blue-500  via-blue-800 to-blue-950 text-xl text-white shadow-md hover:brightness-125 disabled:cursor-wait disabled:brightness-50"
 		>
 			Add Review
