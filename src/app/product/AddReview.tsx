@@ -1,11 +1,14 @@
 "use client";
 
-import { experimental_useOptimistic as useOptimistic } from "react";
+import {
+	experimental_useOptimistic as useOptimistic,
+	useState,
+} from "react";
 import { addReviewAction } from "@/app/product/actions";
-import { useRouter } from "next/navigation";
 import { ReviewItemFragment } from "@/gql/graphql";
 import { ReviewListItem } from "@/ui/molecules/ReviewListItem";
 import { AddReviewButton } from "@/ui/atoms/AddReviewButton";
+import { RatingStars } from "@/ui/molecules/RatingStars";
 
 export const AddReview = ({
 	productId,
@@ -14,7 +17,11 @@ export const AddReview = ({
 	productId: string;
 	reviews: ReviewItemFragment[];
 }) => {
-	const router = useRouter();
+	const [rating, setRating] = useState(0);
+
+	const handleRatingChange = (newRating: number) => {
+		setRating(newRating);
+	};
 	const [optimisticReviews, setOptimisticReviews] =
 		useOptimistic(reviews);
 
@@ -29,7 +36,6 @@ export const AddReview = ({
 		};
 		setOptimisticReviews([...optimisticReviews, newReview]);
 		await addReviewAction(productId, formData);
-		router.refresh();
 	}
 	return (
 		<section className="my-10 grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-40">
@@ -70,26 +76,24 @@ export const AddReview = ({
 						required
 					></textarea>
 				</div>
-				<div className="mb-4">
-					<label
-						htmlFor="rating"
-						className="mb-2 block font-bold text-gray-700"
-					>
-						Rating
-					</label>
-					<select
-						id="rating"
-						name="rating"
-						className="w-full rounded-lg border px-3 py-2 focus:border-blue-500 focus:outline-none"
-						required
-					>
-						<option value="5">5 Stars</option>
-						<option value="4">4 Stars</option>
-						<option value="3">3 Stars</option>
-						<option value="2">2 Stars</option>
-						<option value="1">1 Star</option>
-					</select>
-				</div>
+				<label
+					htmlFor="rating"
+					className="mb-2 block font-bold text-gray-700"
+				>
+					Rating
+				</label>
+				<RatingStars
+					averageRating={rating}
+					readOnly={false}
+					onRatingChange={handleRatingChange}
+				/>
+				<input
+					type="hidden"
+					id="rating"
+					name="rating"
+					value={rating}
+					required
+				/>
 				<div className="mb-4">
 					<label
 						htmlFor="name"

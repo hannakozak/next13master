@@ -27,4 +27,5 @@ export const addReviewAction = async (
 
 	await publishReview(reviewId.id);
 	revalidatePath(`/product/${productId}`);
+	revalidatePath(`/products`);
 };

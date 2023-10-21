@@ -3,8 +3,6 @@ import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductItemFragment } from "@/gql/graphql";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
-import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
 import { VariantsList } from "./VariantsList";
 
 type ProductProps = {
@@ -16,8 +14,6 @@ export const Product = async ({ product }: ProductProps) => {
 
 		const cart = await getOrCreateCart();
 		await addToCart(cart.id, product.id);
-		revalidateTag("cart");
-		redirect("/cart");
 	}
 
 	return (

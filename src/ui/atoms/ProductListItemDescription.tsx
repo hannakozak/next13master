@@ -1,5 +1,6 @@
 import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
+import { RatingStars } from "../molecules/RatingStars";
 
 type ProductListItemDescriptionProps = {
 	product: ProductListItemFragment;
@@ -8,7 +9,6 @@ type ProductListItemDescriptionProps = {
 export const ProductListItemDescription = ({
 	product: { categories, name, price, averageRating },
 }: ProductListItemDescriptionProps) => {
-	console.log(averageRating);
 	return (
 		<div className="m-2">
 			<div className="flex flex-row justify-between">
@@ -32,7 +32,10 @@ export const ProductListItemDescription = ({
 			<p className="sr-only" data-testid="product-rating">
 				{averageRating}
 			</p>
-			<p>AvarageRating: {averageRating}</p>
+
+			{averageRating && (
+				<RatingStars averageRating={averageRating} readOnly={true} />
+			)}
 		</div>
 	);
 };

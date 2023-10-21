@@ -1,5 +1,8 @@
+"use client";
+
 import { type ProductItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
+import { RatingStars } from "./RatingStars";
 
 type ProductDescriptionProps = {
 	product: ProductItemFragment;
@@ -23,9 +26,10 @@ export const ProductDescription = ({
 					{categories[0].name}
 				</p>
 			)}
-			<p>Rating: {averageRating}</p>
+			{averageRating && (
+				<RatingStars averageRating={averageRating} readOnly={true} />
+			)}
 			<p>{description}</p>
-			
 		</div>
 	);
 };
