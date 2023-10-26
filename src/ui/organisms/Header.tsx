@@ -7,7 +7,7 @@ import { ShoppingCart } from "lucide-react";
 import Link from "next/link";
 
 export const Header = async () => {
-	revalidatePath("/*");
+	revalidatePath("/");
 	const cart = await getCartFromCookies();
 	const totalQuantity = cart?.orderItems.reduce(
 		(sum, item) => sum + item.quantity,

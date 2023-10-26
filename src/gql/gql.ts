@@ -20,7 +20,7 @@ const documents = {
     "fragment Cart on Order {\n  id\n  orderItems {\n    id\n    quantity\n    total\n    product {\n      id\n      name\n      price\n    }\n  }\n}": types.CartFragmentDoc,
     "mutation CartRemoveProduct($itemId: ID!) {\n  deleteOrderItem(where: {id: $itemId}) {\n    id\n  }\n}": types.CartRemoveProductDocument,
     "mutation CartSetProductQuantity($quantity: Int!, $itemId: ID!) {\n  updateOrderItem(data: {quantity: $quantity}, where: {id: $itemId}) {\n    quantity\n  }\n}": types.CartSetProductQuantityDocument,
-    "query CategoriesGetByName($name: String!) {\n  categories(where: {name: $name}) {\n    ...Category\n  }\n}": types.CategoriesGetByNameDocument,
+    "query CategoriesGetByName($slug: String!) {\n  categories(where: {slug: $slug}) {\n    ...Category\n  }\n}": types.CategoriesGetByNameDocument,
     "query CategoriesGetList {\n  categories {\n    ...Category\n  }\n}": types.CategoriesGetListDocument,
     "fragment Category on Category {\n  id\n  name\n  slug\n}": types.CategoryFragmentDoc,
     "fragment Collection on Collection {\n  id\n  name\n  slug\n}": types.CollectionFragmentDoc,
@@ -33,7 +33,7 @@ const documents = {
     "fragment ProductItem on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}": types.ProductItemFragmentDoc,
     "fragment ProductListItem on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}": types.ProductListItemFragmentDoc,
     "mutation ProductUpdateAverageRating($averageRating: Int!, $id: ID!) {\n  updateProduct(data: {averageRating: $averageRating}, where: {id: $id}) {\n    id\n    averageRating\n  }\n  publishProduct(to: PUBLISHED, where: {id: $id}) {\n    id\n  }\n}": types.ProductUpdateAverageRatingDocument,
-    "query ProductsGetByCategoryName($name: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {\n  categories(where: {name: $name}) {\n    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategoryNameDocument,
+    "query ProductsGetByCategoryName($slug: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {\n  categories(where: {slug: $slug}) {\n    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategoryNameDocument,
     "query ProductsGetList($orderBy: ProductOrderByInput = name_ASC, $productsPerPage: Int!, $offset: Int!) {\n  products(orderBy: $orderBy, first: $productsPerPage, skip: $offset) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetListBySearchQuery($search: String!) {\n  products(where: {_search: $search}) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListBySearchQueryDocument,
     "query ProductsGetTotalCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetTotalCountDocument,
@@ -74,7 +74,7 @@ export function graphql(source: "mutation CartSetProductQuantity($quantity: Int!
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query CategoriesGetByName($name: String!) {\n  categories(where: {name: $name}) {\n    ...Category\n  }\n}"): typeof import('./graphql').CategoriesGetByNameDocument;
+export function graphql(source: "query CategoriesGetByName($slug: String!) {\n  categories(where: {slug: $slug}) {\n    ...Category\n  }\n}"): typeof import('./graphql').CategoriesGetByNameDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -126,7 +126,7 @@ export function graphql(source: "mutation ProductUpdateAverageRating($averageRat
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetByCategoryName($name: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {\n  categories(where: {name: $name}) {\n    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategoryNameDocument;
+export function graphql(source: "query ProductsGetByCategoryName($slug: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {\n  categories(where: {slug: $slug}) {\n    products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {\n      ...ProductListItem\n    }\n  }\n}"): typeof import('./graphql').ProductsGetByCategoryNameDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -11,10 +11,14 @@ type NavLinksProps = {
 const navLinks: NavLinksProps[] = [
 	{ href: "/", label: "Home", exact: true },
 	{ href: "/products", label: "All", exact: false },
-	{ href: "/categories/T-Shirts", label: "T-shirts", exact: false },
-	{ href: "/categories/Hoodies", label: "Hoodies", exact: false },
+	{ href: "/categories/backpacks", label: "Backpacks", exact: false },
 	{
-		href: "/categories/Accessories",
+		href: "/categories/crossbody",
+		label: "Crossbody And Tote",
+		exact: false,
+	},
+	{
+		href: "/categories/accessories",
 		label: "Accessories",
 		exact: false,
 	},

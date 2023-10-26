@@ -1,10 +1,10 @@
 query ProductsGetByCategoryName(
-	$name: String!
+	$slug: String!
 	$productsPerPage: Int!
 	$offset: Int!
 	$orderBy: ProductOrderByInput
 ) {
-	categories(where: { name: $name }) {
+	categories(where: { slug: $slug }) {
 		products(
 			first: $productsPerPage
 			skip: $offset

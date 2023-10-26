@@ -24,18 +24,19 @@ const nextConfig = {
 				permanent: false,
 			},
 			{
-				source: "/categories/T-Shirts",
-				destination: "/categories/T-Shirts/1",
+				source: "/categories/backpacks",
+				destination: "/categories/backpacks/1",
 				permanent: false,
 			},
 			{
-				source: "/categories/Hoodies",
-				destination: "/categories/Hoodies/1",
+				source: "/categories/crossbody",
+				destination: "/categories/crossbody/1",
 				permanent: false,
 			},
+			//crossbody-and-totes backpacks
 			{
-				source: "/categories/Accessories",
-				destination: "/categories/Accessories/1",
+				source: "/categories/accessories",
+				destination: "/categories/accessories/1",
 				permanent: false,
 			},
 			{

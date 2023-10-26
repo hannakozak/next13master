@@ -1,5 +1,5 @@
-query CategoriesGetByName($name: String!) {
-	categories(where: { name: $name }) {
+query CategoriesGetByName($slug: String!) {
+	categories(where: { slug: $slug }) {
 		...Category
 	}
 }

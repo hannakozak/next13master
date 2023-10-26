@@ -10837,7 +10837,7 @@ export type CartSetProductQuantityMutationVariables = Exact<{
 export type CartSetProductQuantityMutation = { updateOrderItem?: { quantity: number } | null };
 
 export type CategoriesGetByNameQueryVariables = Exact<{
-  name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
 }>;
 
 
@@ -10908,7 +10908,7 @@ export type ProductUpdateAverageRatingMutationVariables = Exact<{
 export type ProductUpdateAverageRatingMutation = { updateProduct?: { id: string, averageRating?: number | null } | null, publishProduct?: { id: string } | null };
 
 export type ProductsGetByCategoryNameQueryVariables = Exact<{
-  name: Scalars['String']['input'];
+  slug: Scalars['String']['input'];
   productsPerPage: Scalars['Int']['input'];
   offset: Scalars['Int']['input'];
   orderBy?: InputMaybe<ProductOrderByInput>;
@@ -11138,8 +11138,8 @@ export const CartSetProductQuantityDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<CartSetProductQuantityMutation, CartSetProductQuantityMutationVariables>;
 export const CategoriesGetByNameDocument = new TypedDocumentString(`
-    query CategoriesGetByName($name: String!) {
-  categories(where: {name: $name}) {
+    query CategoriesGetByName($slug: String!) {
+  categories(where: {slug: $slug}) {
     ...Category
   }
 }
@@ -11256,8 +11256,8 @@ export const ProductUpdateAverageRatingDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<ProductUpdateAverageRatingMutation, ProductUpdateAverageRatingMutationVariables>;
 export const ProductsGetByCategoryNameDocument = new TypedDocumentString(`
-    query ProductsGetByCategoryName($name: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {
-  categories(where: {name: $name}) {
+    query ProductsGetByCategoryName($slug: String!, $productsPerPage: Int!, $offset: Int!, $orderBy: ProductOrderByInput) {
+  categories(where: {slug: $slug}) {
     products(first: $productsPerPage, skip: $offset, orderBy: $orderBy) {
       ...ProductListItem
     }

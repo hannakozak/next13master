@@ -9,16 +9,16 @@ export const getCategoriesList = async () => {
 		query: CategoriesGetListDocument,
 		variables: {},
 		next: {
-			revalidate: 60 * 60 * 24,
+			revalidate: 1,
 		},
 	});
 	return graphqlResponse.categories;
 };
 
-export const getCategoryByName = async (categoryName: string) => {
+export const getCategoryByName = async (categorySlug: string) => {
 	const graphqlResponse = await executeGraphql({
 		query: CategoriesGetByNameDocument,
-		variables: { name: categoryName },
+		variables: { slug: categorySlug },
 	});
 	return graphqlResponse.categories[0];
 };

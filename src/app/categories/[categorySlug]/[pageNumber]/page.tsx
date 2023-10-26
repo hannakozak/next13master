@@ -11,14 +11,14 @@ import { SortInput } from "@/ui/molecules/SortInput";
 import { ProductOrderByInput } from "@/gql/graphql";
 
 type CategoryProductPageProps = {
-	params: { pageNumber: number; categoryName: string };
+	params: { pageNumber: number; categorySlug: string };
 	searchParams: { sort: ProductOrderByInput };
 };
 
 export const generateMetadata = async ({
 	params,
 }: CategoryProductPageProps): Promise<Metadata> => {
-	const category = await getCategoryByName(params.categoryName);
+	const category = await getCategoryByName(params.categorySlug);
 
 	return {
 		title: category?.name,
@@ -33,7 +33,7 @@ export default async function CategoryProductPage({
 	searchParams,
 }: CategoryProductPageProps) {
 	const products = await getProductsByCategoryName(
-		params.categoryName,
+		params.categorySlug,
 		params.pageNumber,
 		searchParams.sort,
 	);
@@ -41,19 +41,16 @@ export default async function CategoryProductPage({
 		notFound();
 	}
 	const productsTotalCount =
-		await getProductsTotalCountByCategoryName(params.categoryName);
+		await getProductsTotalCountByCategoryName(params.categorySlug);
 
 	return (
 		<>
-			<h1 className="first-letter:uppercase">
-				{params.categoryName}
-			</h1>
 			<SortInput />
 			<ProductList products={products} />
 			<Pagination
 				currentPage={params.pageNumber}
 				productsCount={productsTotalCount}
-				path={`categories/${params.categoryName}`}
+				path={`categories/${params.categorySlug}`}
 			/>
 		</>
 	);

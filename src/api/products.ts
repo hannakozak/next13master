@@ -47,12 +47,15 @@ export const getProductById = async (
 		variables: {
 			id: id,
 		},
+		next: {
+			revalidate: 1,
+		},
 	});
 	return graphqlResponse.product;
 };
 
 export const getProductsByCategoryName = async (
-	categoryName: string,
+	categorySlug: string,
 	pageNumber: number = 1,
 	_orderBy: ProductOrderByInput = "createdAt_ASC",
 ) => {
@@ -61,7 +64,7 @@ export const getProductsByCategoryName = async (
 	const data = await executeGraphql({
 		query: ProductsGetByCategoryNameDocument,
 		variables: {
-			name: categoryName,
+			slug: categorySlug,
 			productsPerPage: productsPerPage,
 			offset: offset,
 			orderBy: _orderBy,
