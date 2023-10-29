@@ -34,7 +34,7 @@ export const SearchInput = () => {
 					name="search"
 					value={searchQuery}
 					onChange={(event) => setSearchQuery(event.target.value)}
-					className="w-50 focus:outline-none"
+					className="w-20 focus:outline-none md:w-full"
 					aria-label="Search"
 				/>
 				<Search />
