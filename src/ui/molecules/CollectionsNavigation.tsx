@@ -33,7 +33,7 @@ const collectionLinks: NavLinksProps[] = [
 export const CollectionsNavigation = () => {
 	return (
 		<nav>
-			<ul className="flex justify-center gap-5">
+			<ul className="grid grid-cols-1 lg:grid-cols-3">
 				{collectionLinks.map(({ href, label, exact, photo }) => (
 					<li key={label}>
 						<ActiveLink
