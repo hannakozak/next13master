@@ -49,7 +49,6 @@ export default async function CollectionProductPage({
 
 	return (
 		<>
-			<h1>{collection.name}</h1>
 			<SortInput />
 			<ProductList products={products} />
 			<Pagination
