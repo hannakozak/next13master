@@ -19,7 +19,9 @@ export const SuggestedProducts = async ({
 	await wait(5000);
 	return (
 		<>
-			<h2>Suggested Products</h2>
+			<h2 className="font-semibold text-gray-600 ">
+				Suggested Products
+			</h2>
 			<ProductList products={products} />
 		</>
 	);

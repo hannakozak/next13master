@@ -23,7 +23,7 @@ export const Product = async ({ product }: ProductProps) => {
 					src={product.images[0].url}
 					alt={product.name}
 					width={320}
-					height={320}
+					height={200}
 				/>
 			)}
 			<aside>

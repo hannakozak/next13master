@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { removeItem } from "./actions";
+import { X } from "lucide-react";
 
 export function RemoveButton({ productId }: { productId: string }) {
 	const router = useRouter();
@@ -18,9 +19,8 @@ export function RemoveButton({ productId }: { productId: string }) {
 					router.refresh();
 				})
 			}
-			className="text-sm font-medium text-indigo-600 hover:text-indigo-500 disabled:cursor-wait disabled:text-slate-400"
 		>
-			Remove
+			<X />
 		</button>
 	);
 }

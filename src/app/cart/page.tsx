@@ -47,7 +47,7 @@ export default async function CartPage() {
 			<form action={handleStripePaymentAction} className="ml-auto">
 				<button
 					type="submit"
-					className="brighness-100 font-semiboldbold h-10 rounded-md border bg-gradient-to-r from-blue-500 via-blue-800  to-blue-950 px-6 text-xl text-white shadow-md hover:brightness-125 disabled:cursor-wait disabled:brightness-50"
+					className="brighness-100 font-semiboldbold mb-10 h-14 w-1/4 rounded-md bg-gradient-to-r from-gray-900  to-amber-600 text-xl text-white shadow-md hover:brightness-125 disabled:cursor-wait disabled:brightness-50"
 				>
 					Pay
 				</button>

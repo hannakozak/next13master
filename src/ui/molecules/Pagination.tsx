@@ -26,7 +26,7 @@ export const Pagination = ({
 							<ActiveLink
 								href={`/${path}/${pageNumber}`}
 								exact={false}
-								className="m-1 rounded-md border-2 px-3 py-2 font-semibold text-blue-600 hover:text-blue-800"
+								className="m-1 rounded-md border-2 px-3 py-2 font-semibold text-gray-600 hover:text-gray-800"
 								activeClassName="text-blue-800 border border-2 border-blue-800"
 							>
 								{pageNumber}
