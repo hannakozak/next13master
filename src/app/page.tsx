@@ -3,7 +3,7 @@ import { CollectionsList } from "@/ui/organisms/CollectionsList";
 export default async function Home() {
 	return (
 		<>
-			<section className="flex h-52 flex-col gap-5 text-center align-middle">
+			<section className="my-10 flex flex-col gap-5 text-center">
 				<h2 className="mb-(-5) prose mx-auto mt-10 text-2xl font-semibold text-gray-800">
 					Carry Your World with Style and Ease!
 				</h2>
