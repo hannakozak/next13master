@@ -12,7 +12,7 @@ export const getCollectionsList = async () => {
 		query: CollectionsGetListDocument,
 		variables: {},
 		next: {
-			revalidate: 60 * 60 * 24,
+			revalidate: 1,
 		},
 	});
 	return graphqlResponse.collections;
