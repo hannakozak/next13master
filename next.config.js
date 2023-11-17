@@ -10,9 +10,7 @@ const nextConfig = {
 	},
 	pageExtensions: ["tsx", "ts", "mdx"],
 	experimental: {
-		typedRoutes: true,
 		mdxRs: true,
-		serverActions: true,
 		workerThreads: false,
 		cpus: 1,
 	},
@@ -33,7 +31,6 @@ const nextConfig = {
 				destination: "/categories/crossbody/1",
 				permanent: false,
 			},
-			//crossbody-and-totes backpacks
 			{
 				source: "/categories/accessories",
 				destination: "/categories/accessories/1",

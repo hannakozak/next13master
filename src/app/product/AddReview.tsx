@@ -1,7 +1,7 @@
 "use client";
 
 import {
-	experimental_useOptimistic as useOptimistic,
+	useOptimistic,
 	useState,
 } from "react";
 import { addReviewAction } from "@/app/product/actions";

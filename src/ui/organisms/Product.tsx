@@ -4,6 +4,7 @@ import { ProductItemFragment } from "@/gql/graphql";
 import { AddToCartButton } from "@/ui/atoms/AddToCartButton";
 import { getOrCreateCart, addToCart } from "@/api/cart";
 import { VariantsList } from "./VariantsList";
+import { revalidatePath } from "next/cache";
 
 type ProductProps = {
 	product: ProductItemFragment;
@@ -14,6 +15,7 @@ export const Product = async ({ product }: ProductProps) => {
 
 		const cart = await getOrCreateCart();
 		await addToCart(cart.id, product.id);
+		revalidatePath("/");
 	}
 
 	return (

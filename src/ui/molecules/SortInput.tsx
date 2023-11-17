@@ -47,7 +47,7 @@ export const SortInput = () => {
 				<legend className="font-semibold text-gray-600">
 					Order By: &nbsp;
 					<select
-						className=" px-5 font-semibold transition duration-300 ease-in-out hover:text-amber-600 focus:text-amber-800 active:text-amber-800"
+						className="px-5 font-semibold transition duration-300 ease-in-out hover:text-amber-600 focus:text-amber-800 active:text-amber-800"
 						name="sort-by"
 						id="sort-by-id"
 						value={searchParams.get("sort") || "Sort by"}
